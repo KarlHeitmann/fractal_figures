@@ -101,7 +101,13 @@ export default {
     reverseMessage: function () {
       this.message = this.message.split('').reverse().join('')
     }
-  }
+  },
+  mounted() {
+    console.log("Mounted");
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    this.vueCanvas = ctx;
+  },
 }
 </script>
 
@@ -120,6 +126,12 @@ li {
 }
 a {
   color: #42b983;
+}
+
+#myCanvas {
+    border: 3px solid black;
+    height: 100px;
+    width: 100px
 }
 </style>
 
