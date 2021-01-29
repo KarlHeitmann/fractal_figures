@@ -2,6 +2,8 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>{{ message }}</p>
+    <input v-model="message" placeholder="edit me">
+    <p>Message is: {{ message }}</p>
     <button v-on:click="reverseMessage">Reverse Message</button>
     <canvas
       id     = "myCanvas"
@@ -14,7 +16,6 @@
 <script>
 import {
   run,
-  fibonacciWord,
 } from '../fractals/fibonacci_word';
 
 
@@ -25,15 +26,15 @@ export default {
   },
   data (){
     return {
-      message: "Hello vue.js"
+      message: "15"
     }
   },
   methods: {
     reverseMessage: function () {
-      const fibonacci_string = fibonacciWord(15);
-      this.message = this.message.split('').reverse().join('')
+      // const fibonacci_string = fibonacciWord(Number(this.message));
+      // this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
-      run(fibonacci_string, this.vueCanvas);
+      run(Number(this.message), this.vueCanvas);
     }
   },
   mounted() {

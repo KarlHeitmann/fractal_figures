@@ -27,14 +27,14 @@ const inteligencia = {
   },
 }
 
-function run(fibonacci_string, ctx) {
+function run(fibo_n, ctx) {
   let direction = 'w';
   let i = 0;
   const STEP = 1;
   let x = 50;
   let y = 85;
   let x_step, y_step;
-
+  const fibonacci_string = fibonacciWord(fibo_n);
   fibonacci_string.split('').forEach(paso => {
     x_step = x
     y_step = y
