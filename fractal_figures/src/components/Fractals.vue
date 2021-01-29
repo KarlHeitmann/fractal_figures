@@ -85,7 +85,7 @@ function run(ctx) {
 console.log(run);
 
 export default {
-  name: 'HelloWorld',
+  name: 'Fractals',
   props: {
     msg: String
   },

@@ -1,15 +1,15 @@
 <template>
-  <HelloWorld msg="Fractal Figures"/>
+  <Fractals msg="Fractal Figures"/>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import HelloWorld from './components/Fractals.vue'
+import Fractals from './components/Fractals.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Fractals
   }
 }
 </script>
