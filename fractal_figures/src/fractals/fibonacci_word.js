@@ -27,7 +27,40 @@ const inteligencia = {
   },
 }
 
+function run(fibonacci_string, ctx) {
+  let direction = 'w';
+  let i = 0;
+  const STEP = 1;
+  let x = 50;
+  let y = 85;
+  let x_step, y_step;
+
+  fibonacci_string.split('').forEach(paso => {
+    x_step = x
+    y_step = y
+    if (direction == 'w') {
+      x_step += STEP;
+    } else if (direction == 'e') {
+      x_step -= STEP;
+    } else if (direction == 'n') {
+      y_step += STEP;
+    } else if (direction == 's') {
+      y_step -= STEP;
+    }
+    ctx.moveTo(x, y);
+    ctx.lineTo(x_step, y_step);
+    ctx.stroke();
+    if (paso == '0') {
+      direction = inteligencia[direction][i % 2]
+    }
+    x = x_step
+    y = y_step
+    i +=1
+    // # puts i
+  });
+}
 export {
+  run,
   fibonacciWord,
   inteligencia
 };

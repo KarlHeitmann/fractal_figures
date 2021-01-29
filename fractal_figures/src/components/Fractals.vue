@@ -13,6 +13,7 @@
 
 <script>
 import {
+  run,
   fibonacciWord,
   inteligencia,
 } from '../fractals/fibonacci_word';
@@ -21,43 +22,6 @@ const fibonacci_string = fibonacciWord(15);
 console.log(fibonacci_string);
 
 console.log(inteligencia);
-function run(ctx) {
-/*
-  var c = document.getElementById("myCanvas");
-  var ctx = c.getContext("2d");
-  */
-
-  let direction = 'w';
-  let i = 0;
-  const STEP = 1;
-  let x = 50;
-  let y = 85;
-  let x_step, y_step;
-
-  fibonacci_string.split('').forEach(paso => {
-    x_step = x
-    y_step = y
-    if (direction == 'w') {
-      x_step += STEP;
-    } else if (direction == 'e') {
-      x_step -= STEP;
-    } else if (direction == 'n') {
-      y_step += STEP;
-    } else if (direction == 's') {
-      y_step -= STEP;
-    }
-    ctx.moveTo(x, y);
-    ctx.lineTo(x_step, y_step);
-    ctx.stroke();
-    if (paso == '0') {
-      direction = inteligencia[direction][i % 2]
-    }
-    x = x_step
-    y = y_step
-    i +=1
-    // # puts i
-  });
-}
 console.log(run);
 
 export default {
@@ -74,7 +38,7 @@ export default {
     reverseMessage: function () {
       this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
-      run(this.vueCanvas);
+      run(fibonacci_string, this.vueCanvas);
     }
   },
   mounted() {
