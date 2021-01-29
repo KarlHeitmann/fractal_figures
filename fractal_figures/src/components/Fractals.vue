@@ -5,7 +5,7 @@
     <vue-slider v-model="value" />
     <input v-model="message" placeholder="edit me">
     <p>Message is: {{ message }}</p>
-    <button v-on:click="reverseMessage">Reverse Message</button>
+    <button v-on:click="step">Reverse Message</button>
     <canvas
       id     = "myCanvas"
       width  = "2000"
@@ -19,6 +19,8 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import {
   run,
+  step,
+  fibonacciWord,
 } from '../fractals/fibonacci_word';
 
 
@@ -37,11 +39,12 @@ export default {
     }
   },
   methods: {
-    reverseMessage: function () {
+    step: function () {
       // const fibonacci_string = fibonacciWord(Number(this.message));
       // this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
       console.log(this.brush);
+      step(this.vueCanvas, this.brush)
     }
   },
   mounted() {
@@ -53,16 +56,20 @@ export default {
       x: 50,
       y: 85,
       y_next: 85,
-      x_next: 50
+      x_next: 50,
+      i: 0,
+      fibonacci_string: fibonacciWord(15).split('')
     };
     this.vueCanvas = ctx;
-    run(Number(this.message), this.vueCanvas, {
+    const tmp = {
       step: 1,
       x: 50,
       y: 85,
       y_next: 85,
       x_next: 50
-    });
+    }
+    console.log(tmp)
+    run(Number(this.message), this.vueCanvas, tmp);
   },
 }
 </script>

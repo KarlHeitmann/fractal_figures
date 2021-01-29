@@ -35,7 +35,12 @@ const inteligencia = {
 //   y_next: 85
 // }
 
+function step(ctx, brush) {
+  console.log(brush);
+}
+
 function run(fibo_n, ctx, brush) {
+  console.log(brush)
   let direction = 'w';
   let i = 0;
   const STEP = 1;
@@ -68,5 +73,6 @@ function run(fibo_n, ctx, brush) {
 export {
   run,
   fibonacciWord,
+  step,
   inteligencia
 };
