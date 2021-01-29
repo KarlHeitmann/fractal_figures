@@ -6,12 +6,13 @@
       check out the
       <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
     </p>
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">Reverse Message</button>
     <canvas
       id     = "myCanvas"
       width  = "2000"
       height = "2000"
       ></canvas>
-
   </div>
 </template>
 
@@ -90,6 +91,16 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data (){
+    return {
+      message: "Hello vue.js"
+    }
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
   }
 }
 </script>
