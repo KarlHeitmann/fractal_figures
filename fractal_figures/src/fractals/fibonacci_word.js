@@ -36,7 +36,29 @@ const inteligencia = {
 // }
 
 function step(ctx, brush) {
-  console.log(brush);
+  const {step} = brush;
+
+  console.log(brush)
+  if (brush.direction == 'w') {
+    brush.x_step += step;
+  } else if (brush.direction == 'e') {
+    brush.x_step -= step;
+  } else if (brush.direction == 'n') {
+    brush.y_step += step;
+  } else if (brush.direction == 's') {
+    brush.y_step -= step;
+  }
+
+  ctx.moveTo(brush.x, brush.y);
+  ctx.lineTo(brush.x_step, brush.y_step);
+  ctx.stroke();
+
+  console.log(brush.direction);
+  brush.direction = inteligencia[brush.direction][brush.i % 2];
+
+  brush.i += 1;
+  brush.x = brush.x_step;
+  brush.y = brush.y_step;
 }
 
 function run(fibo_n, ctx, brush) {

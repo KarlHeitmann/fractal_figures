@@ -18,7 +18,7 @@
 import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import {
-  run,
+  //run,
   step,
   fibonacciWord,
 } from '../fractals/fibonacci_word';
@@ -58,6 +58,7 @@ export default {
       y_next: 85,
       x_next: 50,
       i: 0,
+      direction: 'w',
       fibonacci_string: fibonacciWord(15).split('')
     };
     this.vueCanvas = ctx;
@@ -69,7 +70,7 @@ export default {
       x_next: 50
     }
     console.log(tmp)
-    run(Number(this.message), this.vueCanvas, tmp);
+    // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
 </script>
