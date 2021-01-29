@@ -1,11 +1,6 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
     <p>{{ message }}</p>
     <button v-on:click="reverseMessage">Reverse Message</button>
     <canvas
@@ -50,9 +45,11 @@ const inteligencia = {
 }
 
 console.log(inteligencia);
-function run() {
+function run(ctx) {
+/*
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
+  */
 
   let direction = 'w';
   let i = 0;
@@ -100,6 +97,8 @@ export default {
   methods: {
     reverseMessage: function () {
       this.message = this.message.split('').reverse().join('')
+      console.log(this.vueCanvas);
+      run(this.vueCanvas);
     }
   },
   mounted() {
@@ -107,6 +106,7 @@ export default {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     this.vueCanvas = ctx;
+    // run(ctx)
   },
 }
 </script>
@@ -128,10 +128,17 @@ a {
   color: #42b983;
 }
 
+.hello {
+  display: flex;
+  flex-direction: column;
+}
+
 #myCanvas {
     border: 3px solid black;
-    height: 100px;
+    /*
+    height: 0px;
     width: 100px
+    */
 }
 </style>
 
