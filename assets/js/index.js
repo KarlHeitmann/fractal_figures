@@ -8,7 +8,7 @@ function fibonacci_word(n) {
   }
 }
 
-const fibonacci_string = fibonacci_word(20);
+const fibonacci_string = fibonacci_word(15);
 console.log(fibonacci_string);
 
 const inteligencia = {
