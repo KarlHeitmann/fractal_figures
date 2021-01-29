@@ -12,16 +12,7 @@
 </template>
 
 <script>
-function fibonacci_word(n) {
-  if (n == 0) {
-    return '0'
-  } else if (n == 1) {
-    return '01'
-  } else {
-    return fibonacci_word(n - 1) + fibonacci_word(n - 2)
-  }
-}
-
+import fibonacci_word from '../fractals/fibonacci_word';
 const fibonacci_string = fibonacci_word(15);
 console.log(fibonacci_string);
 
