@@ -32,9 +32,6 @@ const inteligencia = {
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
-ctx.moveTo(0, 0);
-ctx.lineTo(200, 100);
-ctx.stroke();
 
 let direction = 'w';
 let i = 0;
@@ -42,6 +39,7 @@ const STEP = 1;
 let x = 50;
 let y = 85;
 let x_step, y_step;
+
 fibonacci_string.split('').forEach(paso => {
   x_step = x
   y_step = y
@@ -54,6 +52,9 @@ fibonacci_string.split('').forEach(paso => {
   } else if (direction == 's') {
     y_step -= STEP;
   }
+  ctx.moveTo(x, y);
+  ctx.lineTo(x_step, y_step);
+  ctx.stroke();
   if (paso == '0') {
     direction = inteligencia[direction][i % 2]
   }
