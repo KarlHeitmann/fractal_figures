@@ -52,14 +52,14 @@ export default {
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
     this.brush = {
-      step: 1,
+      fibonacci_string: fibonacciWord(15),
+      step: 10,
       x: 50,
       y: 85,
       y_next: 85,
       x_next: 50,
       i: 0,
       direction: 'w',
-      fibonacci_string: fibonacciWord(15).split('')
     };
     this.vueCanvas = ctx;
     const tmp = {
