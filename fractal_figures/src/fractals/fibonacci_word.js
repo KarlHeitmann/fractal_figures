@@ -27,34 +27,40 @@ const inteligencia = {
   },
 }
 
-function run(fibo_n, ctx) {
+// const brush = {
+//   step: 1,
+//   x: 50,
+//   y: 85,
+//   x_next: 50,
+//   y_next: 85
+// }
+
+function run(fibo_n, ctx, brush) {
   let direction = 'w';
   let i = 0;
   const STEP = 1;
-  let x = 50;
-  let y = 85;
-  let x_step, y_step;
   const fibonacci_string = fibonacciWord(fibo_n);
+  console.log(brush)
   fibonacci_string.split('').forEach(paso => {
-    x_step = x
-    y_step = y
+    brush.x_step = brush.x
+    brush.y_step = brush.y
     if (direction == 'w') {
-      x_step += STEP;
+      brush.x_step += STEP;
     } else if (direction == 'e') {
-      x_step -= STEP;
+      brush.x_step -= STEP;
     } else if (direction == 'n') {
-      y_step += STEP;
+      brush.y_step += STEP;
     } else if (direction == 's') {
-      y_step -= STEP;
+      brush.y_step -= STEP;
     }
-    ctx.moveTo(x, y);
-    ctx.lineTo(x_step, y_step);
+    ctx.moveTo(brush.x, brush.y);
+    ctx.lineTo(brush.x_step, brush.y_step);
     ctx.stroke();
     if (paso == '0') {
       direction = inteligencia[direction][i % 2]
     }
-    x = x_step
-    y = y_step
+    brush.x = brush.x_step
+    brush.y = brush.y_step
     i +=1
     // # puts i
   });

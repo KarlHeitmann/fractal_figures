@@ -41,13 +41,21 @@ export default {
       // const fibonacci_string = fibonacciWord(Number(this.message));
       // this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
-      run(Number(this.message), this.vueCanvas);
+      console.log(this.brush);
+      run(Number(this.message), this.vueCanvas, this.brush);
     }
   },
   mounted() {
     console.log("Mounted");
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+    this.brush = {
+      step: 1,
+      x: 50,
+      y: 85,
+      y_next: 85,
+      x_next: 50
+    };
     this.vueCanvas = ctx;
     // run(ctx)
   },
