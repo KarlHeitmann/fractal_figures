@@ -2,6 +2,7 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>{{ message }}</p>
+    <vue-slider v-model="value" />
     <input v-model="message" placeholder="edit me">
     <p>Message is: {{ message }}</p>
     <button v-on:click="reverseMessage">Reverse Message</button>
@@ -14,6 +15,8 @@
 </template>
 
 <script>
+import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/default.css'
 import {
   run,
 } from '../fractals/fibonacci_word';
@@ -21,12 +24,16 @@ import {
 
 export default {
   name: 'Fractals',
+  components: {
+    VueSlider
+  },
   props: {
     msg: String
   },
   data (){
     return {
-      message: "15"
+      message: "15",
+      value: 0
     }
   },
   methods: {
