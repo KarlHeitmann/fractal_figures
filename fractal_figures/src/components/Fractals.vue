@@ -42,7 +42,6 @@ export default {
       // this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
       console.log(this.brush);
-      run(Number(this.message), this.vueCanvas, this.brush);
     }
   },
   mounted() {
@@ -57,7 +56,13 @@ export default {
       x_next: 50
     };
     this.vueCanvas = ctx;
-    // run(ctx)
+    run(Number(this.message), this.vueCanvas, {
+      step: 1,
+      x: 50,
+      y: 85,
+      y_next: 85,
+      x_next: 50
+    });
   },
 }
 </script>
