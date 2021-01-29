@@ -15,14 +15,8 @@
 import {
   run,
   fibonacciWord,
-  inteligencia,
 } from '../fractals/fibonacci_word';
 
-const fibonacci_string = fibonacciWord(15);
-console.log(fibonacci_string);
-
-console.log(inteligencia);
-console.log(run);
 
 export default {
   name: 'Fractals',
@@ -36,6 +30,7 @@ export default {
   },
   methods: {
     reverseMessage: function () {
+      const fibonacci_string = fibonacciWord(15);
       this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
       run(fibonacci_string, this.vueCanvas);
