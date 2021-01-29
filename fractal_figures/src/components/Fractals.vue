@@ -12,28 +12,13 @@
 </template>
 
 <script>
-import fibonacci_word from '../fractals/fibonacci_word';
-const fibonacci_string = fibonacci_word(15);
-console.log(fibonacci_string);
+import {
+  fibonacciWord,
+  inteligencia,
+} from '../fractals/fibonacci_word';
 
-const inteligencia = {
-  'w': {
-    0: 'n',
-    1: 's'
-  },
-  'n': {
-    0: 'e',
-    1: 'w'
-  },
-  'e': {
-    0: 's',
-    1: 'n'
-  },
-  's': {
-    0: 'w',
-    1: 'e'
-  },
-}
+const fibonacci_string = fibonacciWord(15);
+console.log(fibonacci_string);
 
 console.log(inteligencia);
 function run(ctx) {
