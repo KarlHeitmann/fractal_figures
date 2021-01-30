@@ -7,8 +7,8 @@
     <div class="sidebar">
       <vue-slider v-model="value" />
       <input v-model="message" placeholder="edit me">
-      <p>Message is: {{ message }}</p>
-      <button v-on:click="step">Reverse Message</button>
+      <p>Fibonacci N: {{ message }}</p>
+      <button v-on:click="step">{{ start_text }}</button>
     </div>
     <div class="main">
       <canvas
@@ -25,8 +25,8 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 import {
   //run,
+  newBrush,
   step,
-  fibonacciWord,
 } from '../fractals/fibonacci_word';
 
 
@@ -40,7 +40,8 @@ export default {
   },
   data (){
     return {
-      message: "15",
+      message: 15,
+      start_text: "Start",
       value: 0
     }
   },
@@ -54,12 +55,14 @@ export default {
       if (this.running) {
         clearInterval(this.fractalsIntervalId);
         this.running = false;
+        this.start_text = 'Start';
       } else {
         this.fractalsIntervalId = setInterval(()=> {
           console.log("Fractals");
           step(this.vueCanvas, this.brush)
         }, 100)
         this.running = true;
+        this.start_text = 'STOP';
       }
     }
   },
@@ -70,16 +73,7 @@ export default {
     var ctx = canvas.getContext("2d");
     this.fractalsIntervalId = null;
     this.running = false
-    this.brush = {
-      fibonacci_string: fibonacciWord(15),
-      step: 10,
-      x: 50,
-      y: 85,
-      y_next: 85,
-      x_next: 50,
-      i: 0,
-      direction: 'w',
-    };
+    this.brush = newBrush(this.message);
     this.vueCanvas = ctx;
     const tmp = {
       step: 1,

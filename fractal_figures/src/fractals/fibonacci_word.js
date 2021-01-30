@@ -8,6 +8,19 @@ function fibonacciWord(n) {
   }
 }
 
+function newBrush(fibonacci_n) {
+  return {
+    fibonacci_string: fibonacciWord(fibonacci_n),
+    step: 10,
+    x: 50,
+    y: 85,
+    y_next: 85,
+    x_next: 50,
+    i: 0,
+    direction: 'w',
+  };
+}
+
 const inteligencia = {
   'w': {
     0: 'n',
@@ -98,5 +111,6 @@ export {
   run,
   fibonacciWord,
   step,
+  newBrush,
   inteligencia
 };
