@@ -57,12 +57,17 @@ export default {
         this.start_text = 'Start';
       } else {
         this.brush = newBrush(this.fibonacci_n);
+        var canvas = document.getElementById('myCanvas');
+        canvas.width = 0;
+        canvas.width = 2000;
         this.fractalsIntervalId = setInterval(()=> {
           step(this.vueCanvas, this.brush)
           console.log(this.brush.fibonacci_string.length)
           console.log(this.brush.i)
           if (this.brush.fibonacci_string.length < this.brush.i) {
-            clearInterval(this.fractalsIntervalId)
+            this.start_text = 'Start';
+            this.running = false;
+            clearInterval(this.fractalsIntervalId);
           }
         }, 100)
         this.running = true;
