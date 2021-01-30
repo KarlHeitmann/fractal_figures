@@ -3,6 +3,7 @@
     <div class="header">
       <h1>{{ msg }}</h1>
       <p>{{ fibonacci_n }}</p>
+      <p class="fibonacci-string">Fibonacci string: {{fibonacci_string }}</p>
     </div>
     <div class="sidebar">
       <vue-slider v-model="fibonacci_n" />
@@ -40,6 +41,7 @@ export default {
   data (){
     return {
       fibonacci_n: 15,
+      fibonacci_string: "",
       start_text: "Start",
       value: 0
     }
@@ -79,6 +81,7 @@ export default {
     this.fractalsIntervalId = null;
     this.running = false
     this.brush = newBrush(this.fibonacci_n);
+    this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
     const tmp = {
       step: 1,
@@ -106,6 +109,7 @@ export default {
 
 .header {
   grid-column: 1 / 2;
+  overflow-y: auto;
 }
 
 .main {
@@ -125,6 +129,9 @@ export default {
     width: 100px
     */
     width: 100%;
+}
+.fibonacci-string {
+  word-wrap: break-word;
 }
 </style>
 
