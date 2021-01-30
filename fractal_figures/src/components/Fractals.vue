@@ -44,13 +44,26 @@ export default {
       // this.message = this.message.split('').reverse().join('')
       console.log(this.vueCanvas);
       console.log(this.brush);
-      step(this.vueCanvas, this.brush)
+      // step(this.vueCanvas, this.brush)
+      if (this.running) {
+        clearInterval(this.fractalsIntervalId);
+        this.running = false;
+      } else {
+        this.fractalsIntervalId = setInterval(()=> {
+          console.log("Fractals");
+          step(this.vueCanvas, this.brush)
+        }, 100)
+        this.running = true;
+      }
     }
   },
   mounted() {
+    // }, 1000)
     console.log("Mounted");
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+    this.fractalsIntervalId = null;
+    this.running = false
     this.brush = {
       fibonacci_string: fibonacciWord(15),
       step: 10,
