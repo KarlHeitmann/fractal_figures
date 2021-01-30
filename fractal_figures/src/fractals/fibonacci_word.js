@@ -51,7 +51,6 @@ const inteligencia = {
 function step(ctx, brush) {
   const {step} = brush;
 
-  console.log(brush)
   if (brush.direction == 'w') {
     brush.x_next += step;
   } else if (brush.direction == 'e') {
@@ -66,7 +65,6 @@ function step(ctx, brush) {
   ctx.lineTo(brush.x_next, brush.y_next);
   ctx.stroke();
 
-  console.log(brush.direction);
   if (brush.fibonacci_string[brush.i] == '0') {
     brush.direction = inteligencia[brush.direction][brush.i % 2];
   }
@@ -77,12 +75,10 @@ function step(ctx, brush) {
 }
 
 function run(fibo_n, ctx, brush) {
-  console.log(brush)
   let direction = 'w';
   let i = 0;
   const STEP = 1;
   const fibonacci_string = fibonacciWord(fibo_n);
-  console.log(brush)
   fibonacci_string.split('').forEach(paso => {
     brush.x_step = brush.x
     brush.y_step = brush.y

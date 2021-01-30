@@ -50,24 +50,29 @@ export default {
     step: function () {
       // const fibonacci_string = fibonacciWord(Number(this.message));
       // this.message = this.message.split('').reverse().join('')
-      console.log(this.vueCanvas);
-      console.log(this.brush);
       // step(this.vueCanvas, this.brush)
       if (this.running) {
         clearInterval(this.fractalsIntervalId);
         this.running = false;
         this.start_text = 'Start';
       } else {
+        this.brush = newBrush(this.fibonacci_n);
         this.fractalsIntervalId = setInterval(()=> {
-          console.log("Fractals");
           step(this.vueCanvas, this.brush)
+          console.log(this.brush.fibonacci_string.length)
+          console.log(this.brush.i)
+          if (this.brush.fibonacci_string.length < this.brush.i) {
+            clearInterval(this.fractalsIntervalId)
+          }
         }, 100)
         this.running = true;
         this.start_text = 'STOP';
       }
     },
     reset: function () {
+      console.log(this.fibonacci_n);
       this.brush = newBrush(this.fibonacci_n);
+      console.log(this.brush);
       var canvas = document.getElementById('myCanvas');
       canvas.width = 0;
       canvas.width = 2000;
