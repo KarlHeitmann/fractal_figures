@@ -1,16 +1,22 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>{{ message }}</p>
-    <vue-slider v-model="value" />
-    <input v-model="message" placeholder="edit me">
-    <p>Message is: {{ message }}</p>
-    <button v-on:click="step">Reverse Message</button>
-    <canvas
-      id     = "myCanvas"
-      width  = "2000"
-      height = "2000"
-      ></canvas>
+  <div class="layout">
+    <div class="header">
+      <h1>{{ msg }}</h1>
+      <p>{{ message }}</p>
+    </div>
+    <div class="sidebar">
+      <vue-slider v-model="value" />
+      <input v-model="message" placeholder="edit me">
+      <p>Message is: {{ message }}</p>
+      <button v-on:click="step">Reverse Message</button>
+    </div>
+    <div class="main">
+      <canvas
+        id     = "myCanvas"
+        width  = "2000"
+        height = "2000"
+        ></canvas>
+    </div>
   </div>
 </template>
 
@@ -105,9 +111,26 @@ a {
   color: #42b983;
 }
 
-.hello {
-  display: flex;
-  flex-direction: column;
+.layout {
+  display: grid;
+  /* grid-template-columns: 1fr 35rem; */
+  /* grid-template-columns: 50rem 35rem; */
+  grid-template-columns: 80vw 20vw;
+  grid-template-rows: 15rem 1fr;
+}
+
+.header {
+  grid-column: 1 / 2;
+}
+
+.main {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.sidebar {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
 }
 
 #myCanvas {
@@ -116,6 +139,7 @@ a {
     height: 0px;
     width: 100px
     */
+    width: 100%;
 }
 </style>
 
