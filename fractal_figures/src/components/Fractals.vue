@@ -6,8 +6,8 @@
       <p class="fibonacci-string">Fibonacci string: {{fibonacci_string }}</p>
     </div>
     <div class="sidebar">
-      <vue-slider v-model="fibonacci_n" />
       <input v-model="fibonacci_n" placeholder="Fibonacci n">
+      <vue-slider v-model="fibonacci_n" />
       <p>Fibonacci N: {{ fibonacci_n }}</p>
       <button v-on:click="step">{{ start_text }}</button>
       <button v-on:click="reset">Reset</button>
