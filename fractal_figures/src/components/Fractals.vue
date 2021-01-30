@@ -2,12 +2,12 @@
   <div class="layout">
     <div class="header">
       <h1>{{ msg }}</h1>
-      <p>{{ message }}</p>
+      <p>{{ fibonacci_n }}</p>
     </div>
     <div class="sidebar">
-      <vue-slider v-model="value" />
-      <input v-model="message" placeholder="edit me">
-      <p>Fibonacci N: {{ message }}</p>
+      <vue-slider v-model="fibonacci_n" />
+      <input v-model="fibonacci_n" placeholder="Fibonacci n">
+      <p>Fibonacci N: {{ fibonacci_n }}</p>
       <button v-on:click="step">{{ start_text }}</button>
     </div>
     <div class="main">
@@ -40,7 +40,7 @@ export default {
   },
   data (){
     return {
-      message: 15,
+      fibonacci_n: 15,
       start_text: "Start",
       value: 0
     }
@@ -73,7 +73,7 @@ export default {
     var ctx = canvas.getContext("2d");
     this.fractalsIntervalId = null;
     this.running = false
-    this.brush = newBrush(this.message);
+    this.brush = newBrush(this.fibonacci_n);
     this.vueCanvas = ctx;
     const tmp = {
       step: 1,
