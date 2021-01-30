@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div id="layout">
     <div class="header">
       <h1>{{ msg }}</h1>
       <p>{{ fibonacci_n }}</p>
@@ -9,14 +9,13 @@
       <input v-model="fibonacci_n" placeholder="Fibonacci n">
       <p>Fibonacci N: {{ fibonacci_n }}</p>
       <button v-on:click="step">{{ start_text }}</button>
+      <button v-on:click="reset">Reset</button>
     </div>
-    <div class="main">
-      <canvas
-        id     = "myCanvas"
-        width  = "2000"
-        height = "2000"
-        ></canvas>
-    </div>
+    <canvas class="main"
+      id     = "myCanvas"
+      width  = "2000"
+      height = "2000"
+      ></canvas>
   </div>
 </template>
 
@@ -64,6 +63,12 @@ export default {
         this.running = true;
         this.start_text = 'STOP';
       }
+    },
+    reset: function () {
+      this.brush = newBrush(this.fibonacci_n);
+      var canvas = document.getElementById('myCanvas');
+      canvas.width = 0;
+      canvas.width = 2000;
     }
   },
   mounted() {
@@ -91,7 +96,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
-.layout {
+#layout {
   display: grid;
   /* grid-template-columns: 1fr 35rem; */
   /* grid-template-columns: 50rem 35rem; */
