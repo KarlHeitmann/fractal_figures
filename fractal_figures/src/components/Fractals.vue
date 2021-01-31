@@ -103,7 +103,7 @@ export default {
           this.start_text = 'Start';
           this.fibonacci_string = this.brush.fibonacci_string;
         } else {
-          this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
+          this.brush = arg2;
           let canvas = document.getElementById('myCanvas');
           canvas.width = 0;
           canvas.width = 2000;
@@ -126,11 +126,11 @@ export default {
         // this.fibonacci_string = this.brush.fibonacci_string;
         this.fibonacci_string = arg2.fibonacci_string;
         for (let i=0; i < this.steps_to_draw; i++) {
-          step(this.vueCanvas, this.brush)
+          step(this.vueCanvas, arg2);
         }
 
       } else if (arg1 == 'reset') {
-        this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
+        this.brush = arg2;
         console.log(this.stroke_size);
         var canvas = document.getElementById('myCanvas');
         canvas.width = 0;

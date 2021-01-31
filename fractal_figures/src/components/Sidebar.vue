@@ -75,7 +75,8 @@ export default {
   methods: {
     auto() {
       console.log("AUTO");
-      this.$emit('messageFromChild', 'auto');
+      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
+      this.$emit('messageFromChild', 'auto', this.brush);
       // this.$emit('messageFromChild', 'click');
     },
     manual() {
@@ -85,7 +86,8 @@ export default {
     },
     reset() {
       console.log("RESET");
-      this.$emit('messageFromChild', 'reset');
+      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
+      this.$emit('messageFromChild', 'reset', this.brush);
     }
   },
   mounted() {
