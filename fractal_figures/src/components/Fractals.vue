@@ -123,6 +123,24 @@ export default {
     // }, 1000)
     console.log("Mounted");
     var canvas = document.getElementById("myCanvas");
+
+    function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        console.log("x: " + x + " y: " + y);
+        return {x, y}
+    }
+
+    // const canvas = document.querySelector('myCanvas');
+    // canvas.addEventListener('mousedown', function(e) {
+    canvas.addEventListener('mousedown', (e) => {
+      const {x, y} = getCursorPosition(canvas, e);
+      this.origin_x = x;
+      this.origin_y = y;
+      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size)
+    })
+
     var ctx = canvas.getContext("2d");
     this.fractalsIntervalId = null;
     this.running = false
