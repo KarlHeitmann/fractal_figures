@@ -29,6 +29,7 @@ import {
   step,
 } from '../fractals/fibonacci_word';
 
+const origin = {x: 50, y: 85};
 
 export default {
   name: 'Fractals',
@@ -56,7 +57,7 @@ export default {
         this.running = false;
         this.start_text = 'Start';
       } else {
-        this.brush = newBrush(this.fibonacci_n);
+        this.brush = newBrush(this.fibonacci_n, origin);
         let canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
@@ -77,7 +78,7 @@ export default {
     },
     reset: function () {
       console.log(this.fibonacci_n);
-      this.brush = newBrush(this.fibonacci_n);
+      this.brush = newBrush(this.fibonacci_n, origin);
       console.log(this.brush);
       var canvas = document.getElementById('myCanvas');
       canvas.width = 0;
@@ -91,7 +92,7 @@ export default {
     var ctx = canvas.getContext("2d");
     this.fractalsIntervalId = null;
     this.running = false
-    this.brush = newBrush(this.fibonacci_n);
+    this.brush = newBrush(this.fibonacci_n, origin);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
     const tmp = {

@@ -1,21 +1,25 @@
 function fibonacciWord(n) {
   if (n == 0) {
     return '0'
+    // return '1'
   } else if (n == 1) {
     return '01'
+    // return '10'
   } else {
     return fibonacciWord(n - 1) + fibonacciWord(n - 2)
   }
 }
 
-function newBrush(fibonacci_n) {
+function newBrush(fibonacci_n, origin) {
+  const {x, y} = origin;
+  console.log(origin)
   return {
     fibonacci_string: fibonacciWord(fibonacci_n),
     step: 10,
-    x: 50,
-    y: 85,
-    y_next: 85,
-    x_next: 50,
+    x,
+    y,
+    x_next: x,
+    y_next: y,
     current_fibo: 1,
     previous_fibo: 1,
     current_color: 0,
