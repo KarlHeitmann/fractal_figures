@@ -93,8 +93,8 @@ export default {
       this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size)
 
     },
-    sidebarMessageReceived: function(arg1) {
-      console.log("sidebarMessageReceived", arg1);
+    sidebarMessageReceived: function(arg1, arg2) {
+      console.log("sidebarMessageReceived", arg1, arg2);
       if (arg1 == 'auto') {
         console.log('auto');
         if (this.running) {
@@ -123,10 +123,12 @@ export default {
           this.start_text = 'STOP';
         }
       } else if (arg1 == 'manual') {
-        this.fibonacci_string = this.brush.fibonacci_string;
+        // this.fibonacci_string = this.brush.fibonacci_string;
+        this.fibonacci_string = arg2.fibonacci_string;
         for (let i=0; i < this.steps_to_draw; i++) {
           step(this.vueCanvas, this.brush)
         }
+
       } else if (arg1 == 'reset') {
         this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
         console.log(this.stroke_size);

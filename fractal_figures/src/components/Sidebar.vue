@@ -48,6 +48,11 @@ const ORIGIN_X = 50;
 const ORIGIN_Y = 85;
 
 import VueSlider from 'vue-slider-component'
+import {
+  //run,
+  newBrush,
+} from '../fractals/fibonacci_word';
+
 export default {
   name: 'Sidebar',
   components: {
@@ -75,12 +80,17 @@ export default {
     },
     manual() {
       console.log("MANUAL");
-      this.$emit('messageFromChild', 'manual');
+      // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size))
+      this.$emit('messageFromChild', 'manual', this.brush);
     },
     reset() {
       console.log("RESET");
       this.$emit('messageFromChild', 'reset');
     }
+  },
+  mounted() {
+    console.log("SIDEBAR mounted");
+    this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
   }
 }
 </script>
