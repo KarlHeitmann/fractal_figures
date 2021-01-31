@@ -34,6 +34,18 @@
         <button v-on:click="step">{{ start_text }}</button>
       </div>
       <button v-on:click="reset">Reset</button>
+      <div class="config-item"><label>Canvas X size</label>
+        <input
+          v-model="size_x"
+          @change="cambio_width"
+          >
+      </div>
+      <div class="config-item"><label>Canvas Y size</label>
+        <input
+          v-model="size_y"
+          @change="cambio_height"
+          >
+      </div>
     </div>
     <div class="main">
       <canvas
@@ -70,6 +82,8 @@ export default {
     return {
       fibonacci_n: 15,
       stroke_size: 10,
+      size_x: 2000,
+      size_y: 2000,
       steps_to_draw: 10,
       origin_x: ORIGIN_X,
       origin_y: ORIGIN_Y,
@@ -79,6 +93,24 @@ export default {
     }
   },
   methods: {
+    cambio_width: function(e) {
+      const {target} = e;
+      console.log(target);
+      console.log(target.value);
+      console.log(this.size_x);
+      let canvas = document.getElementById('myCanvas');
+      canvas.width = this.size_x;
+    },
+    cambio_height: function(e) {
+      console.log("cambio");
+      console.log(e);
+      const {target} = e;
+      console.log(target);
+      console.log(target.value);
+      console.log(this.size_y);
+      let canvas = document.getElementById('myCanvas');
+      canvas.height = this.size_y;
+    },
     click_origin: function (e) {
       function getCursorPosition(canvas, event) {
         const rect = canvas.getBoundingClientRect();
