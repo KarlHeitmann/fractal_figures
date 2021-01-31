@@ -35,11 +35,13 @@
       </div>
       <button v-on:click="reset">Reset</button>
     </div>
-    <canvas class="main"
-      id     = "myCanvas"
-      width  = "2000"
-      height = "2000"
-      ></canvas>
+    <div class="main">
+      <canvas
+        id     = "myCanvas"
+        width  = "2000"
+        height = "2000"
+        ></canvas>
+    </div>
   </div>
 </template>
 
@@ -163,6 +165,7 @@ export default {
   /* grid-template-columns: 50rem 35rem; */
   grid-template-columns: 80vw 20vw;
   grid-template-rows: 15rem 1fr;
+  height: 800px;
 }
 
 .header {
@@ -173,6 +176,7 @@ export default {
 .main {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
+  overflow: auto;
 }
 
 .sidebar {
