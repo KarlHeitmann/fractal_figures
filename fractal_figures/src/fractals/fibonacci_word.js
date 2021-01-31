@@ -22,6 +22,8 @@ class Brush {
     this.y = y;
     this.x_next = x;
     this.y_next = y;
+    this.x_origin = x;
+    this.y_origin = y;
     this.current_fibo = 1;
     this.previous_fibo = 1;
     this.i = 0;
@@ -47,11 +49,29 @@ class Brush {
     }
   }
 
+  Reset() {
+    this.x = this.x_origin;
+    this.y = this.y_origin;
+    this.x_next = this.x_origin;
+    this.y_next = this.y_origin;
+  }
+
+  setOriginAndReset(x, y) {
+    this.setOrigin(x, y);
+    this.Reset()
+  }
+
+  setOriginX(x) {
+    this.x_origin = Number(x);
+  }
+
+  setOriginY(y) {
+    this.y_origin = Number(y);
+  }
+
   setOrigin(x, y) {
-    this.x = x;
-    this.y = y;
-    this.x_next = x;
-    this.y_next = y;
+    this.x_origin = x;
+    this.y_origin = y;
   }
 
   setStrokeSize(stroke_size) {

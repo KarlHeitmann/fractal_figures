@@ -23,11 +23,17 @@
     </div>
     <div class="config-item">
       <label>Origin X:</label>
-      <input v-model="origin_x" placeholder="Origin X">
+      <input
+        v-model="origin_x"
+        @change="change_origin_x"
+        placeholder="Origin X">
     </div>
     <div class="config-item">
       <label>Origin Y:</label>
-      <input v-model="origin_y" placeholder="Origin Y">
+      <input
+        v-model="origin_y"
+        @change="change_origin_y"
+        placeholder="Origin Y">
     </div>
     <div class="config-item"><label>Manual:</label>
       <button v-on:click="manual">Manual</button>
@@ -96,13 +102,20 @@ export default {
     reset() {
       console.log("RESET");
       this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
-      this.$emit('messageFromChild', 'reset', this.brush);
+      this.brush2.Reset()
+      this.$emit('messageFromChild', 'reset', this.brush2);
     },
     change_stroke_size() {
       this.brush2.setStrokeSize(this.stroke_size);
     },
     change_steps_to_draw() {
       this.$emit('messageFromChild', 'steps_to_draw', Number(this.steps_to_draw));
+    },
+    change_origin_x() {
+      this.brush2.setOriginX(this.origin_x)
+    },
+    change_origin_y() {
+      this.brush2.setOriginY(this.origin_y)
     },
   },
   mounted() {

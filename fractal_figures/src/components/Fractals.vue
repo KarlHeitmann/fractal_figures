@@ -134,7 +134,7 @@ export default {
           arg2.step(this.vueCanvas);
         }
       } else if (arg1 == 'reset') {
-        this.brush = arg2;
+        // this.brush = arg2;
         console.log(this.stroke_size);
         var canvas = document.getElementById('myCanvas');
         canvas.width = 0;
