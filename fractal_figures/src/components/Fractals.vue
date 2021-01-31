@@ -70,6 +70,7 @@ export default {
   },
   methods: {
     manual: function() {
+      this.fibonacci_string = this.brush.fibonacci_string;
       for (let i=0; i < this.steps_to_draw; i++) {
         step(this.vueCanvas, this.brush)
       }
@@ -82,12 +83,14 @@ export default {
         clearInterval(this.fractalsIntervalId);
         this.running = false;
         this.start_text = 'Start';
+        this.fibonacci_string = this.brush.fibonacci_string;
       } else {
         this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
         let canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
         this.vueCanvas.beginPath();
+        this.fibonacci_string = this.brush.fibonacci_string;
         this.fractalsIntervalId = setInterval(()=> {
           step(this.vueCanvas, this.brush)
           // console.log(this.brush.fibonacci_string.length)
