@@ -61,13 +61,7 @@ class Brush {
 
   calculateStroke() {
     if (this.direction == 'w') {
-      console.log(this.x)
-      console.log(this.x_next)
       this.x_next += this.stroke_size;
-      console.log("HOLA")
-      console.log(this.x)
-      console.log(this.x_next)
-
     } else if (this.direction == 'e') {
       this.x_next -= this.stroke_size;
     } else if (this.direction == 'n') {

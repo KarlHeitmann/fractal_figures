@@ -128,7 +128,7 @@ export default {
         // this.fibonacci_string = this.brush.fibonacci_string;
         this.fibonacci_string = arg2.fibonacci_string;
         for (let i=0; i < this.steps_to_draw; i++) {
-          // step(this.vueCanvas, arg2);
+          step(this.vueCanvas, arg2);
           this.brush2.step(this.vueCanvas);
         }
       } else if (arg1 == 'reset') {
@@ -155,8 +155,8 @@ export default {
     this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
-    // this.brush2 = new Brush(15, 1, 100, 170);
-    this.brush2 = new Brush(15, 10, 50, 85);
+    this.brush2 = new Brush(15, 5, 200, 340);
+    // this.brush2 = new Brush(15, 10, 50, 85);
     // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
