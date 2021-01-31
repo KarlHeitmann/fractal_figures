@@ -23,3 +23,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.header {
+  grid-column: 1 / 2;
+  overflow-y: auto;
+}
+.fibonacci-string {
+  word-wrap: break-word;
+}
+</style>

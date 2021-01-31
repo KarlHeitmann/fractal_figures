@@ -213,11 +213,6 @@ export default {
   height: 800px;
 }
 
-.header {
-  grid-column: 1 / 2;
-  overflow-y: auto;
-}
-
 .main {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
@@ -240,9 +235,6 @@ export default {
     width: 100px
     */
     width: 100%;
-}
-.fibonacci-string {
-  word-wrap: break-word;
 }
 </style>
 
