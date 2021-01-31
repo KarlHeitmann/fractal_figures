@@ -25,7 +25,7 @@
       <button v-on:click="manual">Manual</button>
     </div>
     <div class="config-item"><label>Auto:</label>
-      <button v-on:click="step">{{ start_text }}</button>
+      <button v-on:click="auto">{{ start_text }}</button>
     </div>
     <button v-on:click="reset">Reset</button>
     <div class="config-item"><label>Canvas X size</label>
@@ -51,10 +51,14 @@ export default {
     VueSlider,
   },
   methods: {
-    step() {
-      console.log("STEP");
-      this.$emit('messageFromChild', 'step');
+    auto() {
+      console.log("AUTO");
+      this.$emit('messageFromChild', 'auto');
       // this.$emit('messageFromChild', 'click');
+    },
+    manual() {
+      console.log("MANUAL");
+      this.$emit('messageFromChild', 'manual');
     }
   }
 }

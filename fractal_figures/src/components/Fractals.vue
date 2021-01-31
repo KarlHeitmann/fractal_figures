@@ -101,6 +101,11 @@ export default {
     },
     sidebarMessageReceived: function(arg1) {
       console.log("sidebarMessageReceived", arg1);
+      if (arg1 == 'auto') {
+        console.log('auto');
+      } else if (arg1 == 'manual') {
+        console.log('manual');
+      }
     },
     childMessageReceived: function(arg1) {
       console.log("WOW", arg1);
