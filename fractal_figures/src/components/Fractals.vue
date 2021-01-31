@@ -7,17 +7,24 @@
     </div>
     <div class="sidebar">
       <div class="config-item">
+        <label>Steps to draw:</label>
+        <input v-model="steps_to_draw" placeholder="Steps to draw">
+      </div>
+      <div class="config-item">
         <label>Recursion depth:</label>
         <input v-model="fibonacci_n" placeholder="Fibonacci n">
       </div>
       <vue-slider v-model="fibonacci_n" />
       <div class="config-item">
         <label>Origin X:</label>
-        <input v-model="origin_x" placeholder="Fibonacci n">
+        <input v-model="origin_x" placeholder="Origin X">
       </div>
       <div class="config-item">
         <label>Origin Y:</label>
-        <input v-model="origin_y" placeholder="Fibonacci n">
+        <input v-model="origin_y" placeholder="Origin Y">
+      </div>
+      <div class="config-item"><label>Manual:</label>
+        <button v-on:click="manual">Manual</button>
       </div>
       <div class="config-item"><label>Auto:</label>
         <button v-on:click="step">{{ start_text }}</button>
@@ -57,10 +64,16 @@ export default {
       fibonacci_n: 15,
       fibonacci_string: "",
       start_text: "Start",
-      value: 0
+      value: 0,
+      steps_to_draw: 10,
     }
   },
   methods: {
+    manual: function() {
+      for (let i=0; i < this.steps_to_draw; i++) {
+        step(this.vueCanvas, this.brush)
+      }
+    },
     step: function () {
       // const fibonacci_string = fibonacciWord(Number(this.message));
       // this.message = this.message.split('').reverse().join('')
