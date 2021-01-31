@@ -61,11 +61,13 @@ export default {
   methods: {
     cambio_width: function(e) {
       const {target} = e;
+      console.log(target);
       let canvas = document.getElementById('myCanvas');
       canvas.width = this.size_x;
     },
     cambio_height: function(e) {
       const {target} = e;
+      console.log(target);
       let canvas = document.getElementById('myCanvas');
       canvas.height = this.size_y;
     },

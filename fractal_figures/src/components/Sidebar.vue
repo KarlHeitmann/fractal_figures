@@ -94,6 +94,30 @@ export default {
     auto() {
       console.log("AUTO");
       console.log(this.vueCanvas)
+
+      if (this.running) {
+        clearInterval(this.fractalsIntervalId);
+        this.running = false;
+        this.start_text = 'Start';
+      } else {
+        // let canvas = document.getElementById('myCanvas');
+        // canvas.width = 0;
+        // canvas.width = 2000;
+        // this.vueCanvas.beginPath();
+        // this.fibonacci_string = this.brush.fibonacci_string;
+        this.fractalsIntervalId = setInterval(()=> {
+          // step(this.vueCanvas, this.brush)
+          this.brush2.step(this.vueCanvas);
+          console.log(this.brush2.i)
+          if (this.brush2.fibonacci_string.length < this.brush2.i) {
+            this.start_text = 'Start';
+            this.running = false;
+            clearInterval(this.fractalsIntervalId);
+          }
+        }, 25)
+        this.running = true;
+        this.start_text = 'STOP';
+      }
       // this.$emit('messageFromChild', 'auto', this.brush);
       // this.$emit('messageFromChild', 'click');
     },
@@ -129,6 +153,7 @@ export default {
   mounted() {
     console.log("SIDEBAR mounted");
     this.brush2 = new Brush(15, 5, 200, 340);
+    this.running = false
   }
 }
 </script>
