@@ -18,6 +18,7 @@ export default {
   methods: {
     btn_click() {
       console.log("CLICK");
+      this.$emit('messageFromChild', 'click');
     }
   }
 }

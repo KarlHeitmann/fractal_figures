@@ -3,6 +3,7 @@
   msg="Fractal figures"
   fibonacci_n="15"
   fibonacci_string="010101"
+  @messageFromChild="childMessageReceived"
   />
   <div id="layout">
     <div class="header">
@@ -141,6 +142,9 @@ export default {
       for (let i=0; i < this.steps_to_draw; i++) {
         step(this.vueCanvas, this.brush)
       }
+    },
+    childMessageReceived: function(arg1) {
+      console.log("WOW", arg1);
     },
     step: function () {
       // const fibonacci_string = fibonacciWord(Number(this.message));
