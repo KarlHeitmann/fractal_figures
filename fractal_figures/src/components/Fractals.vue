@@ -86,30 +86,7 @@ export default {
 
     },
     sidebarMessageReceived: function(arg1, arg2) {
-      if (arg1 == 'auto') {
-        console.log('auto');
-        if (this.running) {
-          clearInterval(this.fractalsIntervalId);
-          this.running = false;
-          this.start_text = 'Start';
-        } else {
-          let canvas = document.getElementById('myCanvas');
-          canvas.width = 0;
-          canvas.width = 2000;
-          this.vueCanvas.beginPath();
-          // this.fibonacci_string = this.brush.fibonacci_string;
-          // this.fractalsIntervalId = setInterval(()=> {
-          //   // step(this.vueCanvas, this.brush)
-          //   if (this.brush.fibonacci_string.length < this.brush.i) {
-          //     this.start_text = 'Start';
-          //     this.running = false;
-          //     clearInterval(this.fractalsIntervalId);
-          //   }
-          // }, 25)
-          this.running = true;
-          this.start_text = 'STOP';
-        }
-      } else if (arg1 == 'reset') {
+      if (arg1 == 'reset') {
         // this.brush = arg2;
         console.log("::::::::::::::::::");
         console.log(this.stroke_size);

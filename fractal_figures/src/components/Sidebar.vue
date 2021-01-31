@@ -92,9 +92,6 @@ export default {
   },
   methods: {
     auto() {
-      console.log("AUTO");
-      console.log(this.vueCanvas)
-
       if (this.running) {
         clearInterval(this.fractalsIntervalId);
         this.running = false;
