@@ -1,16 +1,11 @@
 <template>
-  <Header
-  msg="Fractal figures"
-  fibonacci_n="15"
-  v-bind:fibonacci_string="fibonacci_string"
-  @messageFromChild="childMessageReceived"
-  />
   <div id="layout">
-    <div class="header">
-      <h1>{{ msg }}</h1>
-      <p>{{ fibonacci_n }}</p>
-      <p class="fibonacci-string">Fibonacci string: {{fibonacci_string }}</p>
-    </div>
+    <Header
+    msg="Fractal figures"
+    fibonacci_n="15"
+    v-bind:fibonacci_string="fibonacci_string"
+    @messageFromChild="childMessageReceived"
+    />
     <div class="sidebar">
       <div class="config-item">
         <label>Recursion depth:</label>
