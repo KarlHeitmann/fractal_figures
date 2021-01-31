@@ -1,8 +1,8 @@
 <template>
   <div id="layout">
     <Header
-    msg="Fractal figures"
-    fibonacci_n="15"
+    v-bind:msg="msg"
+    v-bind:fibonacci_n="fibonacci_n"
     v-bind:fibonacci_string="fibonacci_string"
     @messageFromChild="childMessageReceived"
     />
