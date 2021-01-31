@@ -10,11 +10,12 @@ function fibonacciWord(n) {
   }
 }
 
-function newBrush(fibonacci_n, origin) {
+function newBrush(fibonacci_n, origin, stroke_size) {
   const {x, y} = origin;
+  console.log(stroke_size);
   return {
     fibonacci_string: fibonacciWord(fibonacci_n),
-    step: 10,
+    step: stroke_size,
     x,
     y,
     x_next: x,
@@ -68,11 +69,7 @@ function step(ctx, brush) {
     brush.y_next -= step;
   }
 
-  console.log(brush.i)
-  console.log(brush.current_fibo)
-
   if (brush.i >= (brush.current_fibo + brush.previous_fibo)){
-    console.log("red")
     // ctx.strokeStyle = "red";
     ctx.beginPath();
     ctx.strokeStyle = colours[brush.current_color % 5];

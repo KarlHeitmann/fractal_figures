@@ -7,12 +7,16 @@
     </div>
     <div class="sidebar">
       <div class="config-item">
-        <label>Steps to draw:</label>
-        <input v-model="steps_to_draw" placeholder="Steps to draw">
-      </div>
-      <div class="config-item">
         <label>Recursion depth:</label>
         <input v-model="fibonacci_n" placeholder="Fibonacci n">
+      </div>
+      <div class="config-item">
+        <label>Stroke size:</label>
+        <input v-model="stroke_size" placeholder="Stroke size">
+      </div>
+      <div class="config-item">
+        <label>Steps to draw:</label>
+        <input v-model="steps_to_draw" placeholder="Steps to draw">
       </div>
       <vue-slider v-model="fibonacci_n" />
       <div class="config-item">
@@ -66,6 +70,7 @@ export default {
       start_text: "Start",
       value: 0,
       steps_to_draw: 10,
+      stroke_size: 10,
     }
   },
   methods: {
@@ -85,7 +90,7 @@ export default {
         this.start_text = 'Start';
         this.fibonacci_string = this.brush.fibonacci_string;
       } else {
-        this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
+        this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y}, this.stroke_size);
         let canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
@@ -106,12 +111,12 @@ export default {
       }
     },
     reset: function () {
-      console.log(this.fibonacci_n);
-      this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
-      console.log(this.brush);
+      this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y}, Number(this.stroke_size));
+      console.log(this.stroke_size);
       var canvas = document.getElementById('myCanvas');
       canvas.width = 0;
       canvas.width = 2000;
+      console.log("===============");
     }
   },
   mounted() {
@@ -123,7 +128,7 @@ export default {
     this.running = false
     this.origin_x = ORIGIN_X;
     this.origin_y = ORIGIN_Y;
-    this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
+    this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
     // run(Number(this.message), this.vueCanvas, tmp);
