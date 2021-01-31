@@ -127,19 +127,18 @@ export default {
         for (let i=0; i < this.steps_to_draw; i++) {
           step(this.vueCanvas, this.brush)
         }
+      } else if (arg1 == 'reset') {
+        this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
+        console.log(this.stroke_size);
+        var canvas = document.getElementById('myCanvas');
+        canvas.width = 0;
+        canvas.width = 2000;
+        console.log("===============");
       }
     },
     childMessageReceived: function(arg1) {
       console.log("WOW", arg1);
     },
-    reset: function () {
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
-      console.log(this.stroke_size);
-      var canvas = document.getElementById('myCanvas');
-      canvas.width = 0;
-      canvas.width = 2000;
-      console.log("===============");
-    }
   },
   mounted() {
     // }, 1000)

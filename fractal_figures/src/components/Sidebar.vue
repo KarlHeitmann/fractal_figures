@@ -59,6 +59,10 @@ export default {
     manual() {
       console.log("MANUAL");
       this.$emit('messageFromChild', 'manual');
+    },
+    reset() {
+      console.log("RESET");
+      this.$emit('messageFromChild', 'reset');
     }
   }
 }
