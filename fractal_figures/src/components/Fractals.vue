@@ -1,52 +1,14 @@
 <template>
   <div id="layout">
-    <div class="header">
-      <h1>{{ msg }}</h1>
-      <p>{{ fibonacci_n }}</p>
-      <p class="fibonacci-string">Fibonacci string: {{fibonacci_string }}</p>
-    </div>
-    <div class="sidebar">
-      <div class="config-item">
-        <label>Recursion depth:</label>
-        <input v-model="fibonacci_n" placeholder="Fibonacci n">
-      </div>
-      <div class="config-item">
-        <label>Stroke size:</label>
-        <input v-model="stroke_size" placeholder="Stroke size">
-      </div>
-      <div class="config-item">
-        <label>Steps to draw:</label>
-        <input v-model="steps_to_draw" placeholder="Steps to draw">
-      </div>
-      <vue-slider v-model="fibonacci_n" />
-      <div class="config-item">
-        <label>Origin X:</label>
-        <input v-model="origin_x" placeholder="Origin X">
-      </div>
-      <div class="config-item">
-        <label>Origin Y:</label>
-        <input v-model="origin_y" placeholder="Origin Y">
-      </div>
-      <div class="config-item"><label>Manual:</label>
-        <button v-on:click="manual">Manual</button>
-      </div>
-      <div class="config-item"><label>Auto:</label>
-        <button v-on:click="step">{{ start_text }}</button>
-      </div>
-      <button v-on:click="reset">Reset</button>
-      <div class="config-item"><label>Canvas X size</label>
-        <input
-          v-model="size_x"
-          @change="cambio_width"
-          >
-      </div>
-      <div class="config-item"><label>Canvas Y size</label>
-        <input
-          v-model="size_y"
-          @change="cambio_height"
-          >
-      </div>
-    </div>
+    <Header
+    v-bind:msg="msg"
+    v-bind:fibonacci_n="fibonacci_n"
+    v-bind:fibonacci_string="fibonacci_string"
+    @messageFromChild="childMessageReceived"
+    />
+    <Sidebar
+      @messageFromChild="sidebarMessageReceived"
+    />
     <div class="main">
       <canvas
         @click="click_origin"
@@ -59,12 +21,14 @@
 </template>
 
 <script>
-import VueSlider from 'vue-slider-component'
+import Header from './Header'
+import Sidebar from './Sidebar'
 import 'vue-slider-component/theme/default.css'
 import {
   //run,
   newBrush,
   step,
+  Brush,
 } from '../fractals/fibonacci_word';
 
 const ORIGIN_X = 50;
@@ -73,7 +37,8 @@ const ORIGIN_Y = 85;
 export default {
   name: 'Fractals',
   components: {
-    VueSlider
+    Header,
+    Sidebar,
   },
   props: {
     msg: String
@@ -90,6 +55,7 @@ export default {
       fibonacci_string: "",
       start_text: "Start",
       value: 0,
+      brush2: null,
     }
   },
   methods: {
@@ -129,50 +95,58 @@ export default {
       this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size)
 
     },
-    manual: function() {
-      this.fibonacci_string = this.brush.fibonacci_string;
-      for (let i=0; i < this.steps_to_draw; i++) {
-        step(this.vueCanvas, this.brush)
-      }
-    },
-    step: function () {
-      // const fibonacci_string = fibonacciWord(Number(this.message));
-      // this.message = this.message.split('').reverse().join('')
-      // step(this.vueCanvas, this.brush)
-      if (this.running) {
-        clearInterval(this.fractalsIntervalId);
-        this.running = false;
-        this.start_text = 'Start';
-        this.fibonacci_string = this.brush.fibonacci_string;
-      } else {
-        this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
-        let canvas = document.getElementById('myCanvas');
+    sidebarMessageReceived: function(arg1, arg2) {
+      // console.log("sidebarMessageReceived", arg1, arg2);
+      if (arg1 == 'auto') {
+        console.log('auto');
+        if (this.running) {
+          clearInterval(this.fractalsIntervalId);
+          this.running = false;
+          this.start_text = 'Start';
+          this.fibonacci_string = this.brush.fibonacci_string;
+        } else {
+          this.brush = arg2;
+          let canvas = document.getElementById('myCanvas');
+          canvas.width = 0;
+          canvas.width = 2000;
+          this.vueCanvas.beginPath();
+          this.fibonacci_string = this.brush.fibonacci_string;
+          this.fractalsIntervalId = setInterval(()=> {
+            step(this.vueCanvas, this.brush)
+            // console.log(this.brush.fibonacci_string.length)
+            // console.log(this.brush.i)
+            if (this.brush.fibonacci_string.length < this.brush.i) {
+              this.start_text = 'Start';
+              this.running = false;
+              clearInterval(this.fractalsIntervalId);
+            }
+          }, 25)
+          this.running = true;
+          this.start_text = 'STOP';
+        }
+      } else if (arg1 == 'manual') {
+        // this.fibonacci_string = this.brush.fibonacci_string;
+        // this.fibonacci_string = arg2.fibonacci_string;
+        for (let i=0; i < this.steps_to_draw; i++) {
+          // step(this.vueCanvas, arg2);
+          step(this.vueCanvas, this.brush);
+          console.log(arg2);
+          arg2.step(this.vueCanvas);
+        }
+      } else if (arg1 == 'reset') {
+        // this.brush = arg2;
+        console.log(this.stroke_size);
+        var canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
-        this.vueCanvas.beginPath();
-        this.fibonacci_string = this.brush.fibonacci_string;
-        this.fractalsIntervalId = setInterval(()=> {
-          step(this.vueCanvas, this.brush)
-          // console.log(this.brush.fibonacci_string.length)
-          // console.log(this.brush.i)
-          if (this.brush.fibonacci_string.length < this.brush.i) {
-            this.start_text = 'Start';
-            this.running = false;
-            clearInterval(this.fractalsIntervalId);
-          }
-        }, 25)
-        this.running = true;
-        this.start_text = 'STOP';
+        console.log("===============");
+      } else if (arg1 == 'steps_to_draw') {
+        this.steps_to_draw = arg2;
       }
     },
-    reset: function () {
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
-      console.log(this.stroke_size);
-      var canvas = document.getElementById('myCanvas');
-      canvas.width = 0;
-      canvas.width = 2000;
-      console.log("===============");
-    }
+    childMessageReceived: function(arg1) {
+      console.log("WOW", arg1);
+    },
   },
   mounted() {
     // }, 1000)
@@ -185,6 +159,8 @@ export default {
     this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
+    this.brush2 = new Brush(15, 5, 200, 340);
+    // this.brush2 = new Brush(15, 10, 50, 85);
     // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
@@ -202,24 +178,10 @@ export default {
   height: 800px;
 }
 
-.header {
-  grid-column: 1 / 2;
-  overflow-y: auto;
-}
-
 .main {
   grid-column: 1 / 2;
   grid-row: 2 / 3;
   overflow: auto;
-}
-
-.sidebar {
-  grid-column: 2 / 3;
-  grid-row: 1 / 3;
-}
-
-.config-item {
-  display: flex;
 }
 
 #myCanvas {
@@ -229,9 +191,6 @@ export default {
     width: 100px
     */
     width: 100%;
-}
-.fibonacci-string {
-  word-wrap: break-word;
 }
 </style>
 
