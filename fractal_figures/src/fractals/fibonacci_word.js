@@ -16,6 +16,9 @@ function newBrush(fibonacci_n) {
     y: 85,
     y_next: 85,
     x_next: 50,
+    current_fibo: 1,
+    previous_fibo: 1,
+    current_color: 0,
     i: 0,
     direction: 'w',
   };
@@ -47,6 +50,7 @@ const inteligencia = {
 //   x_next: 50,
 //   y_next: 85
 // }
+const colours = ['red', 'blue', 'green', 'crimson', 'dark']
 
 function step(ctx, brush) {
   const {step} = brush;
@@ -59,6 +63,22 @@ function step(ctx, brush) {
     brush.y_next += step;
   } else if (brush.direction == 's') {
     brush.y_next -= step;
+  }
+
+  console.log(brush.i)
+  console.log(brush.current_fibo)
+
+  if (brush.i >= (brush.current_fibo + brush.previous_fibo)){
+    console.log("red")
+    // ctx.strokeStyle = "red";
+    ctx.beginPath();
+    ctx.strokeStyle = colours[brush.current_color % 5];
+    brush.current_color += 1;
+    const tmp_current_fib = brush.previous_fibo + brush.current_fibo;
+    brush.previous_fibo = brush.current_fibo;
+    brush.current_fibo = tmp_current_fib;
+
+    // ctx.strokeStyle = "red";
   }
 
   ctx.moveTo(brush.x, brush.y);
