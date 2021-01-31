@@ -59,15 +59,11 @@ export default {
     }
   },
   methods: {
-    cambio_width: function(e) {
-      const {target} = e;
-      console.log(target);
+    cambio_width: function() {
       let canvas = document.getElementById('myCanvas');
       canvas.width = this.size_x;
     },
-    cambio_height: function(e) {
-      const {target} = e;
-      console.log(target);
+    cambio_height: function() {
       let canvas = document.getElementById('myCanvas');
       canvas.height = this.size_y;
     },
@@ -87,9 +83,6 @@ export default {
     },
     sidebarMessageReceived: function(arg1, arg2) {
       if (arg1 == 'reset') {
-        // this.brush = arg2;
-        console.log("::::::::::::::::::");
-        console.log(this.stroke_size);
         var canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
@@ -106,16 +99,10 @@ export default {
     // }, 1000)
     console.log("Mounted");
     var canvas = document.getElementById("myCanvas");
-
     var ctx = canvas.getContext("2d");
-    this.fractalsIntervalId = null;
-    this.running = false
-    // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
-    // this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
+
     this.brush2 = new Brush(15, 5, 200, 340);
-    // this.brush2 = new Brush(15, 10, 50, 85);
-    // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
 </script>
