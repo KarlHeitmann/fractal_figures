@@ -12,7 +12,6 @@ function fibonacciWord(n) {
 
 function newBrush(fibonacci_n, origin) {
   const {x, y} = origin;
-  console.log(origin)
   return {
     fibonacci_string: fibonacciWord(fibonacci_n),
     step: 10,
