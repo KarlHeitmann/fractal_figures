@@ -61,19 +61,11 @@ export default {
   methods: {
     cambio_width: function(e) {
       const {target} = e;
-      console.log(target);
-      console.log(target.value);
-      console.log(this.size_x);
       let canvas = document.getElementById('myCanvas');
       canvas.width = this.size_x;
     },
     cambio_height: function(e) {
-      console.log("cambio");
-      console.log(e);
       const {target} = e;
-      console.log(target);
-      console.log(target.value);
-      console.log(this.size_y);
       let canvas = document.getElementById('myCanvas');
       canvas.height = this.size_y;
     },
@@ -82,29 +74,23 @@ export default {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        console.log("x: " + x + " y: " + y);
         return {x, y}
       }
 
       let canvas = document.getElementById("myCanvas");
-      // const canvas = document.querySelector('myCanvas');
-      // canvas.addEventListener('mousedown', function(e) {
       const {x, y} = getCursorPosition(canvas, e);
       this.origin_x = x;
       this.origin_y = y;
 
     },
     sidebarMessageReceived: function(arg1, arg2) {
-      // console.log("sidebarMessageReceived", arg1, arg2);
       if (arg1 == 'auto') {
         console.log('auto');
         if (this.running) {
           clearInterval(this.fractalsIntervalId);
           this.running = false;
           this.start_text = 'Start';
-          // this.fibonacci_string = this.brush.fibonacci_string;
         } else {
-          // this.brush = arg2;
           let canvas = document.getElementById('myCanvas');
           canvas.width = 0;
           canvas.width = 2000;
@@ -120,12 +106,6 @@ export default {
           // }, 25)
           this.running = true;
           this.start_text = 'STOP';
-        }
-      } else if (arg1 == 'manual') {
-        for (let i=0; i < this.steps_to_draw; i++) {
-          // step(this.vueCanvas, this.brush);
-          console.log(arg2);
-          arg2.step(this.vueCanvas);
         }
       } else if (arg1 == 'reset') {
         // this.brush = arg2;

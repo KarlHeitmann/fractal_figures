@@ -99,13 +99,10 @@ export default {
     },
     manual() {
       console.log("MANUAL");
-      // this.$emit('messageFromChild', 'manual', this.brush2);
       console.log(this.brush2);
       console.log(this.vueCanvas)
       for (let i=0; i < this.steps_to_draw; i++) {
-        // step(this.vueCanvas, this.brush);
         this.brush2.step(this.vueCanvas);
-        // arg2.step(this.vueCanvas);
       }
     },
     reset() {
