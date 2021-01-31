@@ -45,15 +45,11 @@ export default {
   data (){
     return {
       fibonacci_n: 15,
-      stroke_size: 10,
       size_x: 2000,
       size_y: 2000,
-      steps_to_draw: 10,
       origin_x: ORIGIN_X,
       origin_y: ORIGIN_Y,
       fibonacci_string: "",
-      start_text: "Start",
-      value: 0,
       brush2: null,
       vueCanvas: null,
     }
@@ -82,13 +78,12 @@ export default {
 
     },
     sidebarMessageReceived: function(arg1, arg2) {
+      console.log(arg2);
       if (arg1 == 'reset') {
         var canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
         console.log("===============");
-      } else if (arg1 == 'steps_to_draw') {
-        this.steps_to_draw = arg2;
       }
     },
     childMessageReceived: function(arg1) {
