@@ -76,11 +76,13 @@ class Brush {
 
   fibonacciWord2(n) {
     if (n == 0) {
-      // return '0'
-      return '1'
+      return '0'
+      // return '1'
     } else if (n == 1) {
-      // return '01'
-      return '10'
+      return '01'
+      // return '10'
+      // return '101'
+      // return '101'
     } else {
       return this.fibonacciWord2(n - 1) + this.fibonacciWord2(n - 2)
     }
