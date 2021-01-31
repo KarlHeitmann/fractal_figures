@@ -29,7 +29,7 @@ import {
   step,
 } from '../fractals/fibonacci_word';
 
-const origin = {x: 50, y: 85};
+const origin = {x: 550, y: 585};
 
 export default {
   name: 'Fractals',
@@ -71,7 +71,7 @@ export default {
             this.running = false;
             clearInterval(this.fractalsIntervalId);
           }
-        }, 100)
+        }, 25)
         this.running = true;
         this.start_text = 'STOP';
       }
