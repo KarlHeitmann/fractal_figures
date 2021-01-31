@@ -108,7 +108,6 @@ export default {
         this.fractalsIntervalId = setInterval(()=> {
           // step(this.vueCanvas, this.brush)
           this.brush2.step(this.vueCanvas);
-          console.log(this.brush2.i)
           if (this.brush2.fibonacci_string.length < this.brush2.i) {
             this.start_text = 'Start';
             this.running = false;
