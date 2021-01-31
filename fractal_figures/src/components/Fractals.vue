@@ -8,6 +8,7 @@
     />
     <Sidebar
       @messageFromChild="sidebarMessageReceived"
+      v-bind:vueCanvas="vueCanvas"
     />
     <div class="main">
       <canvas
@@ -26,8 +27,6 @@ import Sidebar from './Sidebar'
 import 'vue-slider-component/theme/default.css'
 import {
   //run,
-  newBrush,
-  step,
   Brush,
 } from '../fractals/fibonacci_word';
 
@@ -46,34 +45,21 @@ export default {
   data (){
     return {
       fibonacci_n: 15,
-      stroke_size: 10,
       size_x: 2000,
       size_y: 2000,
-      steps_to_draw: 10,
       origin_x: ORIGIN_X,
       origin_y: ORIGIN_Y,
       fibonacci_string: "",
-      start_text: "Start",
-      value: 0,
       brush2: null,
+      vueCanvas: null,
     }
   },
   methods: {
-    cambio_width: function(e) {
-      const {target} = e;
-      console.log(target);
-      console.log(target.value);
-      console.log(this.size_x);
+    cambio_width: function() {
       let canvas = document.getElementById('myCanvas');
       canvas.width = this.size_x;
     },
-    cambio_height: function(e) {
-      console.log("cambio");
-      console.log(e);
-      const {target} = e;
-      console.log(target);
-      console.log(target.value);
-      console.log(this.size_y);
+    cambio_height: function() {
       let canvas = document.getElementById('myCanvas');
       canvas.height = this.size_y;
     },
@@ -82,66 +68,22 @@ export default {
         const rect = canvas.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
-        console.log("x: " + x + " y: " + y);
         return {x, y}
       }
 
       let canvas = document.getElementById("myCanvas");
-      // const canvas = document.querySelector('myCanvas');
-      // canvas.addEventListener('mousedown', function(e) {
       const {x, y} = getCursorPosition(canvas, e);
       this.origin_x = x;
       this.origin_y = y;
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size)
 
     },
     sidebarMessageReceived: function(arg1, arg2) {
-      // console.log("sidebarMessageReceived", arg1, arg2);
-      if (arg1 == 'auto') {
-        console.log('auto');
-        if (this.running) {
-          clearInterval(this.fractalsIntervalId);
-          this.running = false;
-          this.start_text = 'Start';
-          this.fibonacci_string = this.brush.fibonacci_string;
-        } else {
-          this.brush = arg2;
-          let canvas = document.getElementById('myCanvas');
-          canvas.width = 0;
-          canvas.width = 2000;
-          this.vueCanvas.beginPath();
-          this.fibonacci_string = this.brush.fibonacci_string;
-          this.fractalsIntervalId = setInterval(()=> {
-            step(this.vueCanvas, this.brush)
-            // console.log(this.brush.fibonacci_string.length)
-            // console.log(this.brush.i)
-            if (this.brush.fibonacci_string.length < this.brush.i) {
-              this.start_text = 'Start';
-              this.running = false;
-              clearInterval(this.fractalsIntervalId);
-            }
-          }, 25)
-          this.running = true;
-          this.start_text = 'STOP';
-        }
-      } else if (arg1 == 'manual') {
-        // this.fibonacci_string = this.brush.fibonacci_string;
-        // this.fibonacci_string = arg2.fibonacci_string;
-        for (let i=0; i < this.steps_to_draw; i++) {
-          // step(this.vueCanvas, arg2);
-          step(this.vueCanvas, this.brush);
-          console.log(arg2);
-          arg2.step(this.vueCanvas);
-        }
-      } else if (arg1 == 'reset') {
-        // this.brush = arg2;
-        console.log(this.stroke_size);
+      console.log(arg2);
+      if (arg1 == 'reset') {
         var canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
         console.log("===============");
-      } else if (arg1 == 'steps_to_draw') {
-        this.steps_to_draw = arg2;
       }
     },
     childMessageReceived: function(arg1) {
@@ -152,16 +94,10 @@ export default {
     // }, 1000)
     console.log("Mounted");
     var canvas = document.getElementById("myCanvas");
-
     var ctx = canvas.getContext("2d");
-    this.fractalsIntervalId = null;
-    this.running = false
-    this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
-    this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
+
     this.brush2 = new Brush(15, 5, 200, 340);
-    // this.brush2 = new Brush(15, 10, 50, 85);
-    // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
 </script>

@@ -65,12 +65,14 @@ const ORIGIN_Y = 85;
 import VueSlider from 'vue-slider-component'
 import {
   //run,
-  newBrush,
   Brush,
 } from '../fractals/fibonacci_word';
 
 export default {
   name: 'Sidebar',
+  props: {
+    vueCanvas: Object,
+  },
   components: {
     VueSlider,
   },
@@ -90,19 +92,41 @@ export default {
   },
   methods: {
     auto() {
-      console.log("AUTO");
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
-      this.$emit('messageFromChild', 'auto', this.brush);
+      if (this.running) {
+        clearInterval(this.fractalsIntervalId);
+        this.running = false;
+        this.start_text = 'Start';
+      } else {
+        // let canvas = document.getElementById('myCanvas');
+        // canvas.width = 0;
+        // canvas.width = 2000;
+        // this.vueCanvas.beginPath();
+        // this.fibonacci_string = this.brush.fibonacci_string;
+        this.fractalsIntervalId = setInterval(()=> {
+          // step(this.vueCanvas, this.brush)
+          this.brush2.step(this.vueCanvas);
+          if (this.brush2.fibonacci_string.length < this.brush2.i) {
+            this.start_text = 'Start';
+            this.running = false;
+            clearInterval(this.fractalsIntervalId);
+          }
+        }, 25)
+        this.running = true;
+        this.start_text = 'STOP';
+      }
+      // this.$emit('messageFromChild', 'auto', this.brush);
       // this.$emit('messageFromChild', 'click');
     },
     manual() {
       console.log("MANUAL");
-      // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size))
-      this.$emit('messageFromChild', 'manual', this.brush2);
+      console.log(this.brush2);
+      console.log(this.vueCanvas)
+      for (let i=0; i < this.steps_to_draw; i++) {
+        this.brush2.step(this.vueCanvas);
+      }
     },
     reset() {
       console.log("RESET");
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
       this.brush2.Reset()
       this.$emit('messageFromChild', 'reset', this.brush2);
     },
@@ -124,8 +148,8 @@ export default {
   },
   mounted() {
     console.log("SIDEBAR mounted");
-    this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.brush2 = new Brush(15, 5, 200, 340);
+    this.running = false
   }
 }
 </script>
