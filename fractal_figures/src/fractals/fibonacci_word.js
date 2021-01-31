@@ -50,7 +50,7 @@ const inteligencia = {
 //   x_next: 50,
 //   y_next: 85
 // }
-const colours = ['red', 'blue', 'green', 'pink', 'dark']
+const colours = ['red', 'blue', 'green', 'crimson', 'dark']
 
 function step(ctx, brush) {
   const {step} = brush;
@@ -71,6 +71,7 @@ function step(ctx, brush) {
   if (brush.i >= (brush.current_fibo + brush.previous_fibo)){
     console.log("red")
     // ctx.strokeStyle = "red";
+    ctx.beginPath();
     ctx.strokeStyle = colours[brush.current_color % 5];
     brush.current_color += 1;
     const tmp_current_fib = brush.previous_fibo + brush.current_fibo;

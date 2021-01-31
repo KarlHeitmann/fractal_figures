@@ -57,9 +57,10 @@ export default {
         this.start_text = 'Start';
       } else {
         this.brush = newBrush(this.fibonacci_n);
-        var canvas = document.getElementById('myCanvas');
+        let canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
+        this.vueCanvas.beginPath();
         this.fractalsIntervalId = setInterval(()=> {
           step(this.vueCanvas, this.brush)
           // console.log(this.brush.fibonacci_string.length)
