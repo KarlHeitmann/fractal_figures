@@ -126,10 +126,12 @@ export default {
         }
       } else if (arg1 == 'manual') {
         // this.fibonacci_string = this.brush.fibonacci_string;
-        this.fibonacci_string = arg2.fibonacci_string;
+        // this.fibonacci_string = arg2.fibonacci_string;
         for (let i=0; i < this.steps_to_draw; i++) {
-          step(this.vueCanvas, arg2);
-          this.brush2.step(this.vueCanvas);
+          // step(this.vueCanvas, arg2);
+          step(this.vueCanvas, this.brush);
+          console.log(arg2);
+          arg2.step(this.vueCanvas);
         }
       } else if (arg1 == 'reset') {
         this.brush = arg2;

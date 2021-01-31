@@ -47,6 +47,18 @@ class Brush {
     }
   }
 
+  setOrigin(x, y) {
+    this.x = x;
+    this.y = y;
+    this.x_next = x;
+    this.y_next = y;
+  }
+
+  setStrokeSize(stroke_size) {
+    console.log(stroke_size)
+    this.stroke_size = Number(stroke_size);
+  }
+
   fibonacciWord2(n) {
     if (n == 0) {
       // return '0'

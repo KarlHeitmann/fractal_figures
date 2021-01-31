@@ -2,17 +2,25 @@
   <div class="sidebar">
     <div class="config-item">
       <label>Recursion depth:</label>
-      <input v-model="fibonacci_n" placeholder="Fibonacci n">
+      <input
+        v-model="fibonacci_n"
+        placeholder="Fibonacci n">
     </div>
+    <vue-slider v-model="fibonacci_n" />
     <div class="config-item">
       <label>Stroke size:</label>
-      <input v-model="stroke_size" placeholder="Stroke size">
+      <input
+        v-model="stroke_size"
+        @change="change_stroke_size"
+        placeholder="Stroke size">
     </div>
     <div class="config-item">
       <label>Steps to draw:</label>
-      <input v-model="steps_to_draw" placeholder="Steps to draw">
+      <input
+        v-model="steps_to_draw"
+        @change="change_steps_to_draw"
+        placeholder="Steps to draw">
     </div>
-    <vue-slider v-model="fibonacci_n" />
     <div class="config-item">
       <label>Origin X:</label>
       <input v-model="origin_x" placeholder="Origin X">
@@ -51,6 +59,7 @@ import VueSlider from 'vue-slider-component'
 import {
   //run,
   newBrush,
+  Brush,
 } from '../fractals/fibonacci_word';
 
 export default {
@@ -82,17 +91,24 @@ export default {
     manual() {
       console.log("MANUAL");
       // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size))
-      this.$emit('messageFromChild', 'manual', this.brush);
+      this.$emit('messageFromChild', 'manual', this.brush2);
     },
     reset() {
       console.log("RESET");
       this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
       this.$emit('messageFromChild', 'reset', this.brush);
-    }
+    },
+    change_stroke_size() {
+      this.brush2.setStrokeSize(this.stroke_size);
+    },
+    change_steps_to_draw() {
+
+    },
   },
   mounted() {
     console.log("SIDEBAR mounted");
     this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
+    this.brush2 = new Brush(15, 5, 200, 340);
   }
 }
 </script>
