@@ -1,4 +1,9 @@
 <template>
+  <Header
+  msg="Fractal figures"
+  fibonacci_n="15"
+  fibonacci_string="010101"
+  />
   <div id="layout">
     <div class="header">
       <h1>{{ msg }}</h1>
@@ -60,6 +65,7 @@
 
 <script>
 import VueSlider from 'vue-slider-component'
+import Header from './Header'
 import 'vue-slider-component/theme/default.css'
 import {
   //run,
@@ -73,7 +79,8 @@ const ORIGIN_Y = 85;
 export default {
   name: 'Fractals',
   components: {
-    VueSlider
+    VueSlider,
+    Header,
   },
   props: {
     msg: String
