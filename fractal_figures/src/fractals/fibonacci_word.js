@@ -10,6 +10,43 @@ function fibonacciWord(n) {
   }
 }
 
+class Brush {
+  constructor(
+    fibonacci_n,
+    stroke_size,
+    x, y,
+  ) {
+    this.fibonacci_string = fibonacciWord(fibonacci_n);
+    this.stroke_size = stroke_size;
+    this.x = x;
+    this.y = y;
+    this.x_next = x;
+    this.y_next = y;
+    this.current_fibo = 1;
+    this.previous_fibo = 1;
+    this.i = 0;
+    this.direction = 'w';
+    this.inteligencia = {
+      'w': {
+        0: 'n',
+        1: 's'
+      },
+      'n': {
+        0: 'e',
+        1: 'w'
+      },
+      'e': {
+        0: 's',
+        1: 'n'
+      },
+      's': {
+        0: 'w',
+        1: 'e'
+      },
+    }
+  }
+}
+
 function newBrush(fibonacci_n, origin, stroke_size) {
   const {x, y} = origin;
   console.log(stroke_size);
@@ -128,5 +165,6 @@ export {
   fibonacciWord,
   step,
   newBrush,
+  Brush,
   inteligencia
 };
