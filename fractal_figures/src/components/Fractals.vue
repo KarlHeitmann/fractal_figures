@@ -6,10 +6,22 @@
       <p class="fibonacci-string">Fibonacci string: {{fibonacci_string }}</p>
     </div>
     <div class="sidebar">
-      <input v-model="fibonacci_n" placeholder="Fibonacci n">
+      <div class="config-item">
+        <label>Recursion depth:</label>
+        <input v-model="fibonacci_n" placeholder="Fibonacci n">
+      </div>
       <vue-slider v-model="fibonacci_n" />
-      <p>Fibonacci N: {{ fibonacci_n }}</p>
-      <button v-on:click="step">{{ start_text }}</button>
+      <div class="config-item">
+        <label>Origin X:</label>
+        <input v-model="origin_x" placeholder="Fibonacci n">
+      </div>
+      <div class="config-item">
+        <label>Origin Y:</label>
+        <input v-model="origin_y" placeholder="Fibonacci n">
+      </div>
+      <div class="config-item"><label>Auto:</label>
+        <button v-on:click="step">{{ start_text }}</button>
+      </div>
       <button v-on:click="reset">Reset</button>
     </div>
     <canvas class="main"
@@ -29,7 +41,8 @@ import {
   step,
 } from '../fractals/fibonacci_word';
 
-const origin = {x: 550, y: 585};
+const ORIGIN_X = 50;
+const ORIGIN_Y = 85;
 
 export default {
   name: 'Fractals',
@@ -57,7 +70,7 @@ export default {
         this.running = false;
         this.start_text = 'Start';
       } else {
-        this.brush = newBrush(this.fibonacci_n, origin);
+        this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
         let canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
@@ -78,7 +91,7 @@ export default {
     },
     reset: function () {
       console.log(this.fibonacci_n);
-      this.brush = newBrush(this.fibonacci_n, origin);
+      this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
       console.log(this.brush);
       var canvas = document.getElementById('myCanvas');
       canvas.width = 0;
@@ -92,17 +105,11 @@ export default {
     var ctx = canvas.getContext("2d");
     this.fractalsIntervalId = null;
     this.running = false
-    this.brush = newBrush(this.fibonacci_n, origin);
+    this.origin_x = ORIGIN_X;
+    this.origin_y = ORIGIN_Y;
+    this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y});
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
-    const tmp = {
-      step: 1,
-      x: 50,
-      y: 85,
-      y_next: 85,
-      x_next: 50
-    }
-    console.log(tmp)
     // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
@@ -132,6 +139,10 @@ export default {
 .sidebar {
   grid-column: 2 / 3;
   grid-row: 1 / 3;
+}
+
+.config-item {
+  display: flex;
 }
 
 #myCanvas {
