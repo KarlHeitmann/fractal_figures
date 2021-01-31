@@ -2,7 +2,7 @@
   <Header
   msg="Fractal figures"
   fibonacci_n="15"
-  fibonacci_string="010101"
+  v-bind:fibonacci_string="fibonacci_string"
   @messageFromChild="childMessageReceived"
   />
   <div id="layout">
