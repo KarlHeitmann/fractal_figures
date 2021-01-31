@@ -37,6 +37,7 @@
     </div>
     <div class="main">
       <canvas
+        @click="click_origin"
         id     = "myCanvas"
         width  = "2000"
         height = "2000"
@@ -68,14 +69,34 @@ export default {
   data (){
     return {
       fibonacci_n: 15,
+      stroke_size: 10,
+      steps_to_draw: 10,
+      origin_x: ORIGIN_X,
+      origin_y: ORIGIN_Y,
       fibonacci_string: "",
       start_text: "Start",
       value: 0,
-      steps_to_draw: 10,
-      stroke_size: 10,
     }
   },
   methods: {
+    click_origin: function (e) {
+      function getCursorPosition(canvas, event) {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        console.log("x: " + x + " y: " + y);
+        return {x, y}
+      }
+
+      let canvas = document.getElementById("myCanvas");
+      // const canvas = document.querySelector('myCanvas');
+      // canvas.addEventListener('mousedown', function(e) {
+      const {x, y} = getCursorPosition(canvas, e);
+      this.origin_x = x;
+      this.origin_y = y;
+      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size)
+
+    },
     manual: function() {
       this.fibonacci_string = this.brush.fibonacci_string;
       for (let i=0; i < this.steps_to_draw; i++) {
@@ -126,28 +147,9 @@ export default {
     console.log("Mounted");
     var canvas = document.getElementById("myCanvas");
 
-    function getCursorPosition(canvas, event) {
-        const rect = canvas.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        console.log("x: " + x + " y: " + y);
-        return {x, y}
-    }
-
-    // const canvas = document.querySelector('myCanvas');
-    // canvas.addEventListener('mousedown', function(e) {
-    canvas.addEventListener('mousedown', (e) => {
-      const {x, y} = getCursorPosition(canvas, e);
-      this.origin_x = x;
-      this.origin_y = y;
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size)
-    })
-
     var ctx = canvas.getContext("2d");
     this.fractalsIntervalId = null;
     this.running = false
-    this.origin_x = ORIGIN_X;
-    this.origin_y = ORIGIN_Y;
     this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
