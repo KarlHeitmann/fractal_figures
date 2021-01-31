@@ -1,9 +1,10 @@
 <template>
   <div class="sidebar">
     <div class="config-item">
-      <label>Recursion depth:</label>
+      <label>Fibonacci_n:</label>
       <input
         v-model="fibonacci_n"
+        @change="change_fibonacci_n"
         placeholder="Fibonacci n">
     </div>
     <vue-slider v-model="fibonacci_n" />
@@ -117,6 +118,9 @@ export default {
     change_origin_y() {
       this.brush2.setOriginY(this.origin_y)
     },
+    change_fibonacci_n() {
+      this.brush2.resetFibonacciN(this.fibonacci_n)
+    }
   },
   mounted() {
     console.log("SIDEBAR mounted");

@@ -48,12 +48,18 @@ class Brush {
       },
     }
   }
-
+  resetFibonacciN(fibonacci_n) {
+    this.fibonacci_string = this.fibonacciWord2(fibonacci_n);
+    this.i = 0;
+  }
   Reset() {
     this.x = this.x_origin;
     this.y = this.y_origin;
     this.x_next = this.x_origin;
     this.y_next = this.y_origin;
+    this.i = 0
+    this.current_fibo = 1;
+    this.previous_fibo = 1;
   }
 
   setOriginAndReset(x, y) {
