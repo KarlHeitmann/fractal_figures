@@ -84,6 +84,8 @@ class Brush {
       // ctx.strokeStyle = "red";
     }
 
+    // console.log(this.x, this.y, this.x_next, this.y_next);
+    // console.log(this.x);
     ctx.moveTo(this.x, this.y);
     ctx.lineTo(this.x_next, this.y_next);
     ctx.stroke();
@@ -100,7 +102,7 @@ class Brush {
 
 function newBrush(fibonacci_n, origin, stroke_size) {
   const {x, y} = origin;
-  console.log(stroke_size);
+  // console.log(stroke_size);
   return {
     fibonacci_string: fibonacciWord(fibonacci_n),
     step: stroke_size,

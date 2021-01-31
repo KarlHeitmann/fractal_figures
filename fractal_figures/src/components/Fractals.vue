@@ -96,7 +96,7 @@ export default {
 
     },
     sidebarMessageReceived: function(arg1, arg2) {
-      console.log("sidebarMessageReceived", arg1, arg2);
+      // console.log("sidebarMessageReceived", arg1, arg2);
       if (arg1 == 'auto') {
         console.log('auto');
         if (this.running) {
@@ -155,7 +155,8 @@ export default {
     this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
-    this.brush2 = new Brush(15, 1, 100, 170);
+    // this.brush2 = new Brush(15, 1, 100, 170);
+    this.brush2 = new Brush(15, 10, 50, 85);
     // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
