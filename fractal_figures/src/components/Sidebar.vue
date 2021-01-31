@@ -102,7 +102,7 @@ export default {
       this.brush2.setStrokeSize(this.stroke_size);
     },
     change_steps_to_draw() {
-
+      this.$emit('messageFromChild', 'steps_to_draw', Number(this.steps_to_draw));
     },
   },
   mounted() {

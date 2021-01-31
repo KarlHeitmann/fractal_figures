@@ -140,6 +140,8 @@ export default {
         canvas.width = 0;
         canvas.width = 2000;
         console.log("===============");
+      } else if (arg1 == 'steps_to_draw') {
+        this.steps_to_draw = arg2;
       }
     },
     childMessageReceived: function(arg1) {
