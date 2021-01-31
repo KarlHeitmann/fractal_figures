@@ -1,4 +1,5 @@
 <template>
+  <Sidebar/>
   <div id="layout">
     <Header
     v-bind:msg="msg"
@@ -62,6 +63,7 @@
 <script>
 import VueSlider from 'vue-slider-component'
 import Header from './Header'
+import Sidebar from './Sidebar'
 import 'vue-slider-component/theme/default.css'
 import {
   //run,
@@ -77,6 +79,7 @@ export default {
   components: {
     VueSlider,
     Header,
+    Sidebar,
   },
   props: {
     msg: String
