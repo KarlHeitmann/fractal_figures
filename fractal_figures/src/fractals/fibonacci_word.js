@@ -16,7 +16,7 @@ class Brush {
     stroke_size,
     x, y,
   ) {
-    this.fibonacci_string = fibonacciWord(fibonacci_n);
+    this.fibonacci_string = this.fibonacciWord2(fibonacci_n);
     this.stroke_size = stroke_size;
     this.x = x;
     this.y = y;
@@ -46,6 +46,19 @@ class Brush {
       },
     }
   }
+
+  fibonacciWord2(n) {
+    if (n == 0) {
+      // return '0'
+      return '1'
+    } else if (n == 1) {
+      // return '01'
+      return '10'
+    } else {
+      return this.fibonacciWord2(n - 1) + this.fibonacciWord2(n - 2)
+    }
+  }
+
   calculateStroke() {
     if (this.direction == 'w') {
       this.x_next += this.step;

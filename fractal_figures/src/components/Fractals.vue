@@ -28,6 +28,7 @@ import {
   //run,
   newBrush,
   step,
+  Brush,
 } from '../fractals/fibonacci_word';
 
 const ORIGIN_X = 50;
@@ -54,6 +55,7 @@ export default {
       fibonacci_string: "",
       start_text: "Start",
       value: 0,
+      brush2: null,
     }
   },
   methods: {
@@ -126,9 +128,9 @@ export default {
         // this.fibonacci_string = this.brush.fibonacci_string;
         this.fibonacci_string = arg2.fibonacci_string;
         for (let i=0; i < this.steps_to_draw; i++) {
-          step(this.vueCanvas, arg2);
+          // step(this.vueCanvas, arg2);
+          this.brush2.step(this.vueCanvas);
         }
-
       } else if (arg1 == 'reset') {
         this.brush = arg2;
         console.log(this.stroke_size);
@@ -153,6 +155,7 @@ export default {
     this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
+    this.brush2 = new Brush(15, 1, 100, 170);
     // run(Number(this.message), this.vueCanvas, tmp);
   },
 }
