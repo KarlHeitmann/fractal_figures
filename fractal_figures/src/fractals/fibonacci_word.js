@@ -26,6 +26,7 @@ class Brush {
     this.previous_fibo = 1;
     this.i = 0;
     this.direction = 'w';
+    this.colours = ['red', 'blue', 'green', 'crimson', 'dark']
     this.inteligencia = {
       'w': {
         0: 'n',
@@ -44,6 +45,43 @@ class Brush {
         1: 'e'
       },
     }
+  }
+  calculateStroke() {
+    if (this.direction == 'w') {
+      this.x_next += this.step;
+    } else if (this.direction == 'e') {
+      this.x_next -= this.step;
+    } else if (this.direction == 'n') {
+      this.y_next += this.step;
+    } else if (this.direction == 's') {
+      this.y_next -= this.step;
+    }
+  }
+
+  step(ctx) {
+    this.calculateStroke()
+    if (this.i >= (this.current_fibo + this.previous_fibo)){
+      // ctx.strokeStyle = "red";
+      ctx.beginPath();
+      ctx.strokeStyle = colours[this.current_color % 5];
+      this.current_color += 1;
+      const tmp_current_fib = this.previous_fibo + this.current_fibo;
+      this.previous_fibo = this.current_fibo;
+      this.current_fibo = tmp_current_fib;
+      // ctx.strokeStyle = "red";
+    }
+
+    ctx.moveTo(this.x, this.y);
+    ctx.lineTo(this.x_next, this.y_next);
+    ctx.stroke();
+
+    if (this.fibonacci_string[this.i] == '0') {
+      this.direction = inteligencia[this.direction][this.i % 2];
+    }
+
+    this.i += 1;
+    this.x = this.x_next;
+    this.y = this.y_next;
   }
 }
 
@@ -84,13 +122,6 @@ const inteligencia = {
   },
 }
 
-// const brush = {
-//   step: 1,
-//   x: 50,
-//   y: 85,
-//   x_next: 50,
-//   y_next: 85
-// }
 const colours = ['red', 'blue', 'green', 'crimson', 'dark']
 
 function step(ctx, brush) {
