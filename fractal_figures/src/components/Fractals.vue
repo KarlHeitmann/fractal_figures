@@ -8,6 +8,7 @@
     />
     <Sidebar
       @messageFromChild="sidebarMessageReceived"
+      v-bind:vueCanvas="vueCanvas"
     />
     <div class="main">
       <canvas
@@ -54,6 +55,7 @@ export default {
       start_text: "Start",
       value: 0,
       brush2: null,
+      vueCanvas: null,
     }
   },
   methods: {

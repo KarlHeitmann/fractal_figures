@@ -71,6 +71,9 @@ import {
 
 export default {
   name: 'Sidebar',
+  props: {
+    vueCanvas: Object,
+  },
   components: {
     VueSlider,
   },
@@ -91,14 +94,22 @@ export default {
   methods: {
     auto() {
       console.log("AUTO");
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
-      this.$emit('messageFromChild', 'auto', this.brush);
+      console.log(this.vueCanvas)
+      // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
+      // this.$emit('messageFromChild', 'auto', this.brush);
       // this.$emit('messageFromChild', 'click');
     },
     manual() {
       console.log("MANUAL");
       // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size))
-      this.$emit('messageFromChild', 'manual', this.brush2);
+      // this.$emit('messageFromChild', 'manual', this.brush2);
+      console.log(this.brush2);
+      console.log(this.vueCanvas)
+      for (let i=0; i < this.steps_to_draw; i++) {
+        // step(this.vueCanvas, this.brush);
+        this.brush2.step(this.vueCanvas);
+        // arg2.step(this.vueCanvas);
+      }
     },
     reset() {
       console.log("RESET");
