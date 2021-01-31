@@ -90,7 +90,7 @@ export default {
         this.start_text = 'Start';
         this.fibonacci_string = this.brush.fibonacci_string;
       } else {
-        this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y}, this.stroke_size);
+        this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
         let canvas = document.getElementById('myCanvas');
         canvas.width = 0;
         canvas.width = 2000;
@@ -111,7 +111,7 @@ export default {
       }
     },
     reset: function () {
-      this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y}, Number(this.stroke_size));
+      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
       console.log(this.stroke_size);
       var canvas = document.getElementById('myCanvas');
       canvas.width = 0;
@@ -128,7 +128,7 @@ export default {
     this.running = false
     this.origin_x = ORIGIN_X;
     this.origin_y = ORIGIN_Y;
-    this.brush = newBrush(this.fibonacci_n, {x: this.origin_x, y: this.origin_y}, this.stroke_size);
+    this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.fibonacci_string = this.brush.fibonacci_string;
     this.vueCanvas = ctx;
     // run(Number(this.message), this.vueCanvas, tmp);
