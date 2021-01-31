@@ -65,7 +65,6 @@ const ORIGIN_Y = 85;
 import VueSlider from 'vue-slider-component'
 import {
   //run,
-  newBrush,
   Brush,
 } from '../fractals/fibonacci_word';
 
@@ -95,13 +94,11 @@ export default {
     auto() {
       console.log("AUTO");
       console.log(this.vueCanvas)
-      // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
       // this.$emit('messageFromChild', 'auto', this.brush);
       // this.$emit('messageFromChild', 'click');
     },
     manual() {
       console.log("MANUAL");
-      // this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size))
       // this.$emit('messageFromChild', 'manual', this.brush2);
       console.log(this.brush2);
       console.log(this.vueCanvas)
@@ -113,7 +110,6 @@ export default {
     },
     reset() {
       console.log("RESET");
-      this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, Number(this.stroke_size));
       this.brush2.Reset()
       this.$emit('messageFromChild', 'reset', this.brush2);
     },
@@ -135,7 +131,6 @@ export default {
   },
   mounted() {
     console.log("SIDEBAR mounted");
-    this.brush = newBrush(this.fibonacci_n, {x: Number(this.origin_x), y: Number(this.origin_y)}, this.stroke_size);
     this.brush2 = new Brush(15, 5, 200, 340);
   }
 }

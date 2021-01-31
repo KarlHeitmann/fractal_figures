@@ -129,6 +129,7 @@ export default {
         }
       } else if (arg1 == 'reset') {
         // this.brush = arg2;
+        console.log("::::::::::::::::::");
         console.log(this.stroke_size);
         var canvas = document.getElementById('myCanvas');
         canvas.width = 0;
