@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="dist/style.css">
+  <link rel="stylesheet" href="dist/default.css">
+  <script src="https://unpkg.com/vue@next"></script>
+  <title>Fractal Figures</title>
+</head>
+<body>
+  <div id="app">
+    <div id="layout">
+      <div class="header">
+        <h1>{{ msg }}</h1>
+        <p>{{ fibonacci_n }}</p>
+        <p class="fibonacci-string">Fibonacci string: {{fibonacci_string }}</p>
+      </div>
+      <div class="sidebar">
+        <input v-model="fibonacci_n" placeholder="Fibonacci n">
+        <p>Fibonacci N: {{ fibonacci_n }}</p>
+        <button v-on:click="step">{{ start_text }}</button>
+        <button v-on:click="reset">Reset</button>
+      </div>
+      <canvas class="main"
+        id     = "myCanvas"
+        width  = "2000"
+        height = "2000"
+        ></canvas>
+    </div>
+  </div>
+<script>
+// import VueSlider from 'vue-slider-component'
+// import {
+//   //run,
+//   newBrush,
+//   step,
+// } from './fractals/fibonacci_word';
+
+
+function fibonacciWord(n) {
+  if (n == 0) {
+    return '0'
+  } else if (n == 1) {
+    return '01'
+  } else {
+    return fibonacciWord(n - 1) + fibonacciWord(n - 2)
+  }
+}
+
+function newBrush(fibonacci_n) {
+  return {
+    fibonacci_string: fibonacciWord(fibonacci_n),
+    step: 10,
+    x: 50,
+    y: 85,
+    y_next: 85,
+    x_next: 50,
+    current_fibo: 1,
+    previous_fibo: 1,
+    current_color: 0,
+    i: 0,
+    direction: 'w',
+  };
+}
+
+const inteligencia = {
+  'w': {
+    0: 'n',
+    1: 's'
+  },
+  'n': {
+    0: 'e',
+    1: 'w'
+  },
+  'e': {
+    0: 's',
+    1: 'n'
+  },
+  's': {
+    0: 'w',
+    1: 'e'
+  },
+}
+
+// const brush = {
+//   step: 1,
+//   x: 50,
+//   y: 85,
+//   x_next: 50,
+//   y_next: 85
+// }
+const colours = ['red', 'blue', 'green', 'crimson', 'dark']
+
+function step(ctx, brush) {
+  const {step} = brush;
+
+  if (brush.direction == 'w') {
+    brush.x_next += step;
+  } else if (brush.direction == 'e') {
+    brush.x_next -= step;
+  } else if (brush.direction == 'n') {
+    brush.y_next += step;
+  } else if (brush.direction == 's') {
+    brush.y_next -= step;
+  }
+
+  console.log(brush.i)
+  console.log(brush.current_fibo)
+
+  if (brush.i >= (brush.current_fibo + brush.previous_fibo)){
+    console.log("red")
+    // ctx.strokeStyle = "red";
+    ctx.beginPath();
+    ctx.strokeStyle = colours[brush.current_color % 5];
+    brush.current_color += 1;
+    const tmp_current_fib = brush.previous_fibo + brush.current_fibo;
+    brush.previous_fibo = brush.current_fibo;
+    brush.current_fibo = tmp_current_fib;
+
+    // ctx.strokeStyle = "red";
+  }
+
+  ctx.moveTo(brush.x, brush.y);
+  ctx.lineTo(brush.x_next, brush.y_next);
+  ctx.stroke();
+
+  if (brush.fibonacci_string[brush.i] == '0') {
+    brush.direction = inteligencia[brush.direction][brush.i % 2];
+  }
+
+  brush.i += 1;
+  brush.x = brush.x_next;
+  brush.y = brush.y_next;
+}
+
+function run(fibo_n, ctx, brush) {
+  let direction = 'w';
+  let i = 0;
+  const STEP = 1;
+  const fibonacci_string = fibonacciWord(fibo_n);
+  fibonacci_string.split('').forEach(paso => {
+    brush.x_step = brush.x
+    brush.y_step = brush.y
+    if (direction == 'w') {
+      brush.x_step += STEP;
+    } else if (direction == 'e') {
+      brush.x_step -= STEP;
+    } else if (direction == 'n') {
+      brush.y_step += STEP;
+    } else if (direction == 's') {
+      brush.y_step -= STEP;
+    }
+    ctx.moveTo(brush.x, brush.y);
+    ctx.lineTo(brush.x_step, brush.y_step);
+    ctx.stroke();
+    if (paso == '0') {
+      direction = inteligencia[direction][i % 2]
+    }
+    brush.x = brush.x_step
+    brush.y = brush.y_step
+    i +=1
+    // # puts i
+  });
+}
+
+
+const app_vuejs = {
+  name: 'Fractals',
+  props: {
+    msg: String
+  },
+  data (){
+    return {
+      fibonacci_n: 15,
+      fibonacci_string: "",
+      start_text: "Start",
+      value: 0
+    }
+  },
+  methods: {
+    step: function () {
+      // const fibonacci_string = fibonacciWord(Number(this.message));
+      // this.message = this.message.split('').reverse().join('')
+      // step(this.vueCanvas, this.brush)
+      if (this.running) {
+        clearInterval(this.fractalsIntervalId);
+        this.running = false;
+        this.start_text = 'Start';
+      } else {
+        this.brush = newBrush(this.fibonacci_n);
+        let canvas = document.getElementById('myCanvas');
+        canvas.width = 0;
+        canvas.width = 2000;
+        this.vueCanvas.beginPath();
+        this.fractalsIntervalId = setInterval(()=> {
+          step(this.vueCanvas, this.brush)
+          // console.log(this.brush.fibonacci_string.length)
+          // console.log(this.brush.i)
+          if (this.brush.fibonacci_string.length < this.brush.i) {
+            this.start_text = 'Start';
+            this.running = false;
+            clearInterval(this.fractalsIntervalId);
+          }
+        }, 100)
+        this.running = true;
+        this.start_text = 'STOP';
+      }
+    },
+    reset: function () {
+      console.log(this.fibonacci_n);
+      this.brush = newBrush(this.fibonacci_n);
+      console.log(this.brush);
+      var canvas = document.getElementById('myCanvas');
+      canvas.width = 0;
+      canvas.width = 2000;
+    }
+  },
+  mounted() {
+    console.log("Mounted");
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    this.fractalsIntervalId = null;
+    this.running = false
+    this.brush = newBrush(this.fibonacci_n);
+    this.fibonacci_string = this.brush.fibonacci_string;
+    this.vueCanvas = ctx;
+    const tmp = {
+      step: 1,
+      x: 50,
+      y: 85,
+      y_next: 85,
+      x_next: 50
+    }
+    console.log(tmp)
+    // run(Number(this.message), this.vueCanvas, tmp);
+  },
+}
+
+Vue.createApp(app_vuejs).mount('#app')
+
+</script>
+</body>
+</html>
